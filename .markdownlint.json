@@ -1,0 +1,15 @@
+{
+    "default": true,
+    "line-length": false,
+    "no-duplicate-header": false,
+    "no-inline-html": {
+        "allowed_elements": [
+            "a"
+        ]
+    },
+    "no-hard-tabs": false,
+    "no-trailing-punctuation": false,
+    "ol-prefix": {
+        "style": "ordered"
+    }
+}
