@@ -51,3 +51,17 @@ brew cask outdated
 # 升級所有已安裝的應用程式至最新的版本
 brew cask upgrade
 ```
+
+## 修復 Dock 上的 icon 遺失
+
+* 先從 Applications 內，將該app拖移到 Dock
+
+* 若不行的話，將電腦進入[安全模式](https://support.apple.com/HT201262)，會清掉 low-level caches
+
+1. 關機
+    ![image](https://cdn1.tekrevue.com/wp-content/uploads/2018/03/Shut-Down.jpg)
+
+2. 開機時按住shift，直到開機完成
+    ![image](https://cdn1.tekrevue.com/wp-content/uploads/2018/03/Shift-Key.jpg)
+
+3. 正常重新開機
