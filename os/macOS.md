@@ -65,3 +65,33 @@ brew cask upgrade
     ![image](https://cdn1.tekrevue.com/wp-content/uploads/2018/03/Shift-Key.jpg)
 
 3. 正常重新開機
+
+## 完整反安裝 Xcode
+
+```sh
+/Apllications/Xcode.app
+/Library/Preferences/com.apple.dt.Xcode.plist
+~/Library/Preferences/com.apple.dt.Xcode.plist
+~/Library/Caches/com.apple.dt.Xcode
+~/Library/Application Support/Xcode
+```
+
+## 安裝 Xcode Command Line 開發者套件而不安裝 XCode
+
+```sh
+sudo xcode-select --install
+```
+
+## 刪除 .DS_Store
+
+```sh
+find . -type f -name ".DS_Store" -o -name "._*" -delete
+```
+
+## 不要在網路磁碟上自動產生 `.DS_Store`
+
+> .DS_Store 會用來儲存目錄圖示狀態
+
+```sh
+defaults write com.apple.desktopservices DSDontWriteNetworkStores true
+```
