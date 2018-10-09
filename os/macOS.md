@@ -95,3 +95,5 @@ find . -type f -name ".DS_Store" -o -name "._*" -delete
 ```sh
 defaults write com.apple.desktopservices DSDontWriteNetworkStores true
 ```
+
+## [自動加載ssh key](../applications/git.md#adding-your-ssh-key-to-the-ssh-agent)

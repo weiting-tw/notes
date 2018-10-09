@@ -74,3 +74,7 @@ module.exports = {
     : '/'
 }
 ```
+
+gitlab 的 CI/CD 配置管理
+
+<http://blog.51cto.com/flyfish225/2156602>
