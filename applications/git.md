@@ -79,3 +79,20 @@ Add your SSH private key to the ssh-agent and store your passphrase in the keych
 Note: The -K option is Apple's standard version of ssh-add, which stores the passphrase in your keychain for you when you add an ssh key to the ssh-agent.
 
 If you don't have Apple's standard version installed, you may receive an error. For more information on resolving this error, see "[Error: ssh-add: illegal option -- K](https://help.github.com/articles/error-ssh-add-illegal-option-k)."*
+
+## 救回 Commit
+
+誤 reset 時，使用 `reflog` 觀看 git 的歷程
+
+```sh
+> git reflog
+657fce7 (HEAD -> master) HEAD@{0}: reset: moving to HEAD~2
+e12d8ef (origin/master, origin/HEAD, cat) HEAD@{1}: checkout: moving from cat to master
+e12d8ef (origin/master, origin/HEAD, cat) HEAD@{2}: checkout: moving from master to cat
+```
+
+指定 Commit 即可救回
+
+```sh
+> git reset e12d8ef --hard
+```
