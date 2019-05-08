@@ -48,3 +48,10 @@ IIS Crypto is a free tool that gives administrators the ability to enable or dis
     ``` sh
     netsh advfirewall firewall add rule name="Demo IIS Express" protocol=TCP dir=in localport=49486 action=allow
     ```
+
+## 403. Forbidden
+
+Folder permissions for web application
+
+Folder add permission  
+User Name: `IIS AppPool\ApplicationPoolName`
