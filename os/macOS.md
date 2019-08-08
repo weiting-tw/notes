@@ -97,3 +97,26 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores true
 ```
 
 ## [自動加載ssh key](../applications/git.md#adding-your-ssh-key-to-the-ssh-agent)
+
+## [開啟 cron job 的記錄檔](https://apple.stackexchange.com/questions/38861/where-is-the-cron-log-file-in-macosx-lion)
+
+1. 編輯 /etc/syslog.conf
+
+    在這個檔案裡加上下面一行：
+
+    ```sh
+    sudo cron.* /var/log/cron.log
+    ```
+
+2. 重新啟動 syslogd
+
+    執行下面的兩行指令，重新指動 syslod：
+
+    ```sh
+    sudo launchctl unload /System/Library/LaunchDaemons/com.apple.syslogd.plist
+    sudo launchctl load /System/Library/LaunchDaemons/com.apple.syslogd.plist
+    ```
+
+3. 檢查 /var/log/cron.log
+
+    等 cron job 的時間到了之後，應該就能看到 `/var/log/cron.log` 了
