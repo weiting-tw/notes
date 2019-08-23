@@ -6,4 +6,5 @@
 * [IIS](iis.md)
 * [Npm](npm.md)
 * [Synology](synology.md)
-* [Web...](withWeb.md)
+* [Web](withWeb.md)
+* [DNS](dns.md)
