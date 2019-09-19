@@ -14,6 +14,7 @@
   * [C#](language/csharp/README.md)
     * [遠端偵錯-Remote Debugger](language/csharp/remote-debug.md)
     * [預設值表](language/csharp/defaultValue.md)
+  * [JavaScript](language/js.md)
   * [PowerShell](language/PowerShell.md)
 * [作業系統](os/README.md)
   * [Mac OS](os/macOS.md)
