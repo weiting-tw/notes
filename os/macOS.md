@@ -120,3 +120,14 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores true
 3. 檢查 /var/log/cron.log
 
     等 cron job 的時間到了之後，應該就能看到 `/var/log/cron.log` 了
+
+## QuickLook
+
+Folder path:
+> /Library/QuickLook/
+> /Users/$(whoami)/Library/QuickLook/
+
+* [QuicklookStephen](https://github.com/whomwah/qlstephen)
+  QLStephen is a QuickLook plugin that lets you view plain text files without a file extension. Files like:`README`, `INSTALL`, `Capfile`, `CHANGELOG`, etc...
+* [QLMarkdown](https://github.com/toland/qlmarkdown)
+  QuickLook generator for Markdown files.
