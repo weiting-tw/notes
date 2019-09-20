@@ -96,3 +96,27 @@ e12d8ef (origin/master, origin/HEAD, cat) HEAD@{2}: checkout: moving from master
 ```sh
 > git reset e12d8ef --hard
 ```
+
+## 對底下的所有資料夾執行 git 指令
+
+使用 npm 的套件 [gitfox](!https://github.com/aibeb/gitfox)
+
+使用方法
+
+```sh
+g <command> [<parent-dir>]
+g 'config core.filemode false'
+g 'fetch --all'
+```
+
+## 複製整個資料夾到另外一個磁碟出現檔案已被修改
+
+可能是因為檔案權限被異動
+like `755=rwxr-xr-x` to `644=rw-r--r--`
+
+Suggests setting core.filemode to false.
+
+```sh
+git config core.filemode false
+git config core.filemode false --global
+```
