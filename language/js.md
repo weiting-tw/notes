@@ -1,6 +1,6 @@
 # JavaScript
 
-## tips
+## Tips
 
 ### Get last word
 
