@@ -131,3 +131,11 @@ Folder path:
   QLStephen is a QuickLook plugin that lets you view plain text files without a file extension. Files like:`README`, `INSTALL`, `Capfile`, `CHANGELOG`, etc...
 * [QLMarkdown](https://github.com/toland/qlmarkdown)
   QuickLook generator for Markdown files.
+
+## Beyond compare
+
+```bash
+#!/bin/bash
+rm "/Users/$(whoami)/Library/Application Support/Beyond Compare/registry.dat"
+"`dirname "$0"`"/BCompare.bak $@
+```
