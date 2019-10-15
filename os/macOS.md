@@ -139,3 +139,55 @@ Folder path:
 rm "/Users/$(whoami)/Library/Application Support/Beyond Compare/registry.dat"
 "`dirname "$0"`"/BCompare.bak $@
 ```
+
+## zshrc
+
+```bash
+## alias
+alias cls=clear
+alias ping='prettyping --nolegend'
+alias help='tldr'
+alias top="sudo htop"
+### Beyond Compare
+alias bc=bcomp
+
+### update brew
+up() {
+  brew update
+  brew upgrade
+  brew cleanup
+  brew cask upgrade
+  rm -rf "$(brew --cache)"
+}
+## functions
+
+### kill process with particular port
+#### port: $1
+killport() {
+  PROCESS_ID=$(lsof -ti:$1);
+  if [ "$PROCESS_ID" != "" ]; then
+    echo "Try to kill process:$PROCESS_ID with using port: $1.";
+    kill -9 $PROCESS_ID;
+  fi
+}
+
+## change git author name
+gitNameChange2Weiting() {
+  git filter-branch --env-filter '
+  OLD_EMAIL="wilber_chen@gss.com.tw"
+  CORRECT_NAME="weiting"
+  CORRECT_EMAIL="a26007565@gmail.com"
+  
+  if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]
+  then
+  export GIT_COMMITTER_NAME="$CORRECT_NAME"
+  export GIT_COMMITTER_EMAIL="$CORRECT_EMAIL"
+  fi
+  if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]
+  then
+  export GIT_AUTHOR_NAME="$CORRECT_NAME"
+  export GIT_AUTHOR_EMAIL="$CORRECT_EMAIL"
+  fi
+  ' --tag-name-filter cat -- --branches --tags
+}
+```
