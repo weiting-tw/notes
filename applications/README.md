@@ -5,6 +5,7 @@
 * [DNS](dns.md)
 * [Git](git.md)
 * [GitLab](gitlab.md)
+* [GitLab-CI](gitlab-ci.md)
 * [GPG](gpg.md)
 * [IIS](iis.md)
 * [Npm](npm.md)
