@@ -181,3 +181,36 @@ test:
 If JUnit XML files are generated and uploaded as part of a pipeline, these reports can be viewed inside the pipelines details page. The Tests tab on this page will display a list of test suites and cases reported from the XML file.
 
 ![junit-test-reports](/images/gitlab/junit-test-reports.png)
+
+## [MinIO](https://min.io/)
+
+MinIO is High Performance Object Storage released under Apache License v2.0. It is API compatible with Amazon S3 cloud storage service. Using MinIO build high performance infrastructure for machine learning, analytics and application data workloads.
+
+### [Install with docker](https://docs.min.io/docs/minio-docker-quickstart-guide.html)
+
+```sh
+docker run -it --restart always -p 9005:9000 \
+    --name minio \
+    -e "MINIO_ACCESS_KEY=YOUR_ACCESS_KEY" \
+    -e "MINIO_SECRET_KEY=YOUR_SECRET_KEY" \
+    -v /.minio:/root/.minio -v /export:/export \
+    minio/minio:latest server /export
+```
+
+### [Set gitlab-runner config](https://docs.gitlab.com/runner/configuration/autoscale.html#distributed-runners-caching)
+
+```toml
+[[runners]]
+  limit = 10
+  executor = "docker+machine"
+  [runners.cache]
+    Type = "s3"
+    Path = "path/to/prefix"
+    Shared = false
+    [runners.cache.s3]
+      ServerAddress = "MinIO_server_url"
+      AccessKey = "YOUR_ACCESS_KEY"
+      SecretKey = "YOUR_SECRET_KEY"
+      BucketName = "runner"
+      Insecure = false # using https
+```
