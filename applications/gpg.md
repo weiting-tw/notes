@@ -63,14 +63,19 @@ GPG Keys 的 Fingerprint (指紋) `A7935E31448D6D55E6A90F31DF7D85F066F4FC1D`
 
 ## 提交到 Github/GitLab
 
-```shell
-> gpg --list-secret-keys
+取得 GPG key ID: `DF7D85F066F4FC1D`
 
+GPG Fingerprint: `A7935E31448D6D55E6A90F31DF7D85F066F4FC1D`
+
+```shell
+> gpg --list-secret-keys --keyid-format LONG
+
+/Users/weiting/.gnupg/pubring.kbx
 ---------------------------------
-sec   rsa4096 2020-01-09 [SC]
+sec   rsa4096/DF7D85F066F4FC1D 2020-01-09 [SC]
       A7935E31448D6D55E6A90F31DF7D85F066F4FC1D
-uid           [ultimate] Wilber_chen (GSS) <wilber_chen@gss.com.tw>
-ssb   rsa4096 2020-01-09 [E]
+uid                 [ultimate] Wilber_chen (GSS) <wilber_chen@gss.com.tw>
+ssb   rsa4096/C13513872FF9040D 2020-01-09 [E]
 ```
 
 ### 產生public key
@@ -91,10 +96,10 @@ l+iEv7WEq8S9VBTj6AtRsspodZtXyRWuW3oreqWeSMt/9e9JYdioQVaRD2lw867+
 
 ```shell
 # 僅限此倉庫
-> git config user.signingkey 0D69E11F12BDBA077B3726AB4E1F799AA4FF2279
+> git config user.signingkey DF7D85F066F4FC1D
 
 # 全域設定
-> git config --global user.signingkey 0D69E11F12BDBA077B3726AB4E1F799AA4FF2279
+> git config --global user.signingkey DF7D85F066F4FC1D
 ```
 
 在 commit 時加上 `-S`
@@ -115,7 +120,7 @@ l+iEv7WEq8S9VBTj6AtRsspodZtXyRWuW3oreqWeSMt/9e9JYdioQVaRD2lw867+
 
 ## 故障排除
 
-如果在下 git commit 後出現這個錯誤：
+### 如果在下 git commit 後出現這個錯誤：
 
 ```shell
 error: gpg failed to sign the data
@@ -124,7 +129,7 @@ fatal: failed to write commit object
 
 請嘗試以下兩種解法
 
-### 解法一
+#### 解法一
 
 請執行 echo "test" | gpg --clearsign 檢查看看是 git 的問題還是 gpg 的問題。
 
@@ -139,15 +144,41 @@ gpg: [stdin]: clear-sign failed: Inappropriate ioctl for device
 
 再執行一次 echo "test" | gpg --clearsign 看看是成功執行。
 
-### 解法二
+#### 解法二
 
 安裝 pinentry-mac
 
+```sh
 > brew install pinentry-mac
-將以下設定新增至 ~/.gnupg/gpg.conf
-> no-tty
-以下設定新增至 ~/.gnupg/gpg-agent.conf
-> pinentry-program /usr/local/bin/pinentry-mac
-清除背景執行的 gpg-agent
+
+# 將以下設定新增至 ~/.gnupg/gpg.conf
+no-tty
+
+# 以下設定新增至 ~/.gnupg/gpg-agent.conf
+pinentry-program /usr/local/bin/pinentry-mac
+
+# 清除背景執行的 gpg-agent
 > killall gpg-agent
-執行 echo "test" | gpg --clearsign 看看是成功執行。
+
+# 執行看看是成功執行。
+> echo "test" | gpg --clearsign 
+```
+
+### 如果出現 No such file or directory
+
+```sh
+error: cannot run gpg: No such file or directory
+
+error: could not run gpg.
+
+fatal: failed to write commit object (128)
+```
+
+執行下列
+
+```sh
+> git config --global gpg.program $(which gpg)
+
+# GitHub got back to me and said that some users also need to use:
+> echo "no-tty" >> ~/.gnupg/gpg.conf
+```
