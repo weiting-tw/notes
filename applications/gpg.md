@@ -177,7 +177,11 @@ fatal: failed to write commit object (128)
 執行下列
 
 ```sh
+# mac
 > git config --global gpg.program $(which gpg)
+
+# windows
+> git config --global gpg.program "C:/Program Files (x86)/GNU/GnuPG/gpg2.exe" 
 
 # GitHub got back to me and said that some users also need to use:
 > echo "no-tty" >> ~/.gnupg/gpg.conf
