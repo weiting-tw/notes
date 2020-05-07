@@ -120,3 +120,63 @@ Suggests setting core.filemode to false.
 git config core.filemode false
 git config core.filemode false --global
 ```
+
+## 移除本地已合併的分支
+
+First, list all branches that were merged in remote.
+
+```sh
+git branch --merged
+```
+
+You might see few branches you don't want to remove. we can add few arguments to skip important branches that we don't want to delete like master or a develop. The following command will skip master branch and anything that has dev in it.
+
+```sh
+git branch --merged| egrep -v "(^\*|master|dev)"
+```
+
+If you want to skip, you can add it to the egrep command like the following. The branch skip_branch_name will not be deleted.
+
+```sh
+git branch --merged| egrep -v "(^\*|master|dev|skip_branch_name)"
+```
+
+To delete all local branches that are already merged into the currently checked out branch:
+
+```sh
+git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d
+```
+
+You can see that master and dev are excluded in case they are an ancestor.
+
+You can delete a merged local branch with:
+
+```sh
+git branch -d branchname
+```
+
+If it's not merged, use:
+
+```sh
+git branch -D branchname
+```
+
+To delete it from the remote use:
+
+```sh
+git push --delete origin branchname
+
+git push origin :branchname    # for really old git
+```
+
+Once you delete the branch from the remote, you can prune to get rid of remote tracking branches with:
+
+```sh
+git remote prune origin
+```
+
+or prune individual remote tracking branches, as the other answer suggests, with:
+
+```sh
+git branch -dr branchname
+```
