@@ -37,3 +37,20 @@ dns_cloudflare_api_key = <your apiKey>
 # 每兩個月的1號執行
 0 0 1 */2 * certbot renew --quiet
 ```
+
+### docker Run
+
+```sh
+docker run -it \
+-v ~/letsencrypt/:/etc/letsencrypt \
+-v ~/.secrets/certbot/cloudflare.ini:/tmp/certbot/cloudflare.ini \
+certbot/dns-cloudflare  certonly \
+--dns-cloudflare \
+--dns-cloudflare-credentials /tmp/certbot/cloudflare.ini \
+-d <your domain> \
+-m <your mail>
+```
+
+## pem to pfx
+
+> openssl pkcs12 -in cert.pem -inkey privkey.pem -export -out server.pfx

@@ -1,6 +1,7 @@
 # Summary
 
 * [應用程式](applications/README.md)
+  * [android](applications/android.md)
   * [Bower](applications/bower.md)
   * [Curl](applications/curl.md)
   * [DNS](applications/dns.md)
@@ -11,7 +12,9 @@
   * [GPG](applications/gpg.md)
   * [IIS](applications/iis.md)
   * [Npm](applications/npm.md)
+  * [Redis](applications/redis.md)
   * [SSH](applications/ssh.md)
+  * [Synology](applications/synology.md)
   * [Web](applications/withWeb.md)
 * [程式語言](language/README.md)
   * [C#](language/csharp/README.md)

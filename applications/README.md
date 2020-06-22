@@ -1,8 +1,10 @@
 # Applications
 
+* [Android](android.md)
 * [Bower](bower.md)
 * [Curl](curl.md)
 * [DNS](dns.md)
+* [Docker](docker.md)
 * [Git](git.md)
 * [GitLab](gitlab.md)
 * [GitLab-CI](gitlab-ci.md)
@@ -10,6 +12,7 @@
 * [GPG](gpg.md)
 * [IIS](iis.md)
 * [Npm](npm.md)
+* [Redis](redis.md)
 * [SSH](ssh.md)
 * [Synology](synology.md)
 * [Web](withWeb.md)
