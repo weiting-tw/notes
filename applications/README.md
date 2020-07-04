@@ -5,6 +5,7 @@
 * [Curl](curl.md)
 * [DNS](dns.md)
 * [Docker](docker.md)
+* [Fail2ban](fail2ban.md)
 * [Git](git.md)
 * [GitLab](gitlab.md)
 * [GitLab-CI](gitlab-ci.md)

@@ -6,6 +6,7 @@
   * [Curl](applications/curl.md)
   * [DNS](applications/dns.md)
   * [Docker](applications/docker.md)
+  * [Fail2ban](applications/fail2ban.md)
   * [Git](applications/git.md)
   * [GitLab](applications/gitlab.md)
   * [GitLab CI](applications/gitlab-ci.md)
