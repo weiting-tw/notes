@@ -180,3 +180,52 @@ or prune individual remote tracking branches, as the other answer suggests, with
 ```sh
 git branch -dr branchname
 ```
+
+## 設定 git ignore 命令並自動下載所需的 .gitignore 範本
+
+[gitignore.io](https://www.gitignore.io/) 網站收集了各種不同程式語言、開發框架、開發工具所需的 .gitignore 檔案範本
+
+### Web API
+
+該網站其實主要也只有兩個端點可用：
+
+- 列出所有範本清單
+  > https://www.gitignore.io/api/list
+
+- 取得特定範本內容
+  > https://www.gitignore.io/api/{types}
+
+- 例如你要取得 VisualStudio 範本的內容，就可以直接呼叫
+  > https://www.gitignore.io/api/visualstudio
+
+- 如果你想取得 dart 與 flutter 的範本，就可以直接呼叫
+  > https://www.gitignore.io/api/dart,flutter
+
+shell
+
+```shell
+git config --global alias.ignore "!gi() { curl -sL https://www.gitignore.io/api/$@ ;}; gi"
+```
+
+> 請注意：官網提供的命令是以「單引號」包含字串，但這個設定並不適用於 Windows 的命令提示字元，建議改用「雙引號」，就可以同時適用於 Windows/Linux/macOS 所有的 Shell 執行環境。不過還是要設定一下驚嘆號的跳脫字元才能執行！
+
+bash
+
+```bash
+git config --global alias.ignore '!'"gi() { curl -sL https://www.gitignore.io/api/\$@ ;}; gi"
+```
+
+- 取得範本清單
+  > git ignore list
+
+- 下載 VisualStudio 範本
+  > git ignore visualstudio > .gitignore
+
+- 同時下載 VisualStudio 與 ASPNETCore 範本
+  > git ignore visualstudio,aspnetcore > .gitignore
+
+### 快速調整 Git 設定的小工具
+
+[@willh/git-setup](https://www.npmjs.com/package/@willh/git-setup) 會全自動設定 Git 版控環境，並且跨平台支援 Windows, Linux, macOS 等作業系統的命令列環境，尤其針對中文環境經常會出現亂碼的問題都會完整的解決。
+
+> npx @willh/git-setup
