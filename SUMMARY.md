@@ -13,6 +13,7 @@
   * [GPG](applications/gpg.md)
   * [Home Assistant](applications/homeAssistant.md)
   * [IIS](applications/iis.md)
+  * [Ngrok](applications/ngrok.md)
   * [Npm](applications/npm.md)
   * [Redis](applications/redis.md)
   * [SSH](applications/ssh.md)
