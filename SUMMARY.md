@@ -1,6 +1,8 @@
 # Summary
 
 * [應用程式](applications/README.md)
+  * [Azure](applications/azure/azure.md)
+    * [Logic App](applications/azure/logicApp.md)
   * [Android](applications/android.md)
   * [Bower](applications/bower.md)
   * [Curl](applications/curl.md)

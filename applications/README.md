@@ -1,5 +1,7 @@
 # Applications
 
+* [Azure](azure.md)
+  * [Logic App](azure/logicApp.md)
 * [Android](android.md)
 * [Bower](bower.md)
 * [Curl](curl.md)
