@@ -10,7 +10,7 @@
 @{body('http1')?['data']?['create_item']?['id']}
 ```
 
-## schema
+## Schema
 
 ### application/x-www-form-urlencoded
 
@@ -33,4 +33,13 @@
     "type": "Http"
   }
 }
+```
+
+## [Outbound IP Addresses](https://docs.microsoft.com/zh-tw/azure/azure-functions/ip-addresses#function-app-outbound-ip-addresses)
+
+每個函式應用程式都有一組可用的輸出 IP 位址。 任何來自應用程式的輸出連線 (例如連往後端資料庫) 都會使用其中一個可用的輸出 IP 位址作為來源 IP 位址。 您事先不知道指定的連線會使用哪個 IP 位址。 基於這個理由，您的後端服務必須對函式應用程式的所有輸出 IP 位址開啟其防火牆。
+
+```bash
+az webapp show --resource-group <group_name> --name <app_name> --query outboundIpAddresses --output tsv
+az webapp show --resource-group <group_name> --name <app_name> --query possibleOutboundIpAddresses --output tsv
 ```
