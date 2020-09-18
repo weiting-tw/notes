@@ -131,3 +131,70 @@ Feb 16 14:14:56 raspberrypi watchdog[3818]: loadavg 88 18 6 is higher than the g
 Feb 16 14:14:56 raspberrypi watchdog[3818]: /usr/lib/sendmail does not exist or is not executable (errno = 2)
 Feb 16 14:14:56 raspberrypi watchdog[3818]: shutting down the system because of error -3
 ```
+
+## l2tp
+
+open port: `500` & `4500`
+
+> wget https://git.io/vpnsetup -O vpnsetup.sh
+> nano vpnsetup.sh
+
+update settings:
+
+- YOUR_IPSEC_PSK=""
+- YOUR_USERNAME=""
+- YOUR_PASSWORD=""
+
+> sudo sh vpnsetup.sh
+
+### 設置用戶名密碼
+
+> nano /etc/ppp/chap-secrets
+
+```bash
+#用戶名    服務名    密碼    指定IP
+
+username    *    "password"    *
+```
+
+### 設置PSK預共享密鑰
+
+> nano /etc/ipsec.secrets
+
+```bash
+# source    destination
+
+51.15.139.201 51.15.44.48 : PSK "87zRQqylaoeF5I8o4lRhwvmUzf+pYdDpsCOlesIeFA/2xrtxKXJTbCPZgqplnXgPX5uprL+aRgxD8ua7MmdWaQ"
+%any  %any  : PSK "xxxx"
+```
+
+### split log
+
+這裡可以利用 syslog 來配置
+
+在/etc/rsyslog.d/ 下新建 `20-xl2tpd.conf` 文件，內容如下：
+
+> vi /etc/rsyslog.d/20-xl2tpd.conf
+
+``` conf
+if $programname == 'xl2tpd' then /var/log/l2tp.log
+
+&~
+```
+
+在/etc/rsyslog.d/ 下新建 `20-pptpd.conf` 文件，內容如下：
+
+> vi /etc/rsyslog.d/20-pptpd.conf
+
+``` conf
+if $programname == 'pppd' then /var/log/l2tp.log
+
+&~
+```
+
+> service rsyslog restart
+
+### 服務重啟
+
+> service ipsec restart
+> service xl2tpd restart
