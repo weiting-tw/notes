@@ -171,3 +171,9 @@ docker安裝後預設沒有daemon.json這個配置檔案，需要進行手動建
 ```sh
 docker cp <containId>:<path> <toPath>
 ```
+
+## 載入 volume
+
+```sh
+docker run -it --rm -v <volumeId>:/data node bash
+```
