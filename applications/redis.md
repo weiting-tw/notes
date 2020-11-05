@@ -234,3 +234,15 @@ var value3 = await db.StringGetAsync("key3");
 db.StringSet("key4", JsonConvert.SerializeObject(new Employee(25, "Clayton Gragg")));
 var value4 = JsonConvert.DeserializeObject<Employee>(db.StringGet("e25"));
 ```
+
+## Azure Redis
+
+### Commands
+
+```bash
+# List
+SCAN 0 COUNT 1000 MATCH *
+
+# Delete
+DEL key1 key2 key3...
+```
