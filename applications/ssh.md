@@ -23,3 +23,44 @@ PasswordAuthentication no
 ```
 
 and Add public key to `%PROGRAMDATA%\ssh\administrators_authorized_keys`
+
+## Alias
+
+在 `~/.ssh` 下新增 `config`
+
+```config
+Host alias-name                       # 用來連線的 alias 名稱
+ HostName server.name                 # host domain 或 ip
+ Port port-number                     # host 的 SSH port
+ IdentitiesOnly yes                   # 使用指定的 key
+ IdentityFile ~/.ssh/private_ssh_file # 指定 pem 或 pub 的 key 路徑
+ User username-on-remote-machine      # (選填)登入 SSH 的 username，只連 git 的話，可以不必要
+ ForwardX11 yes                       # (選填) 啟用回傳 GUI
+```
+
+like:
+
+```config
+Host cs-bizform-test
+ HostName cs-bizform-test
+ IdentitiesOnly yes
+ IdentityFile ~/.ssh/id_rsa
+ User wilber_chen
+```
+
+基本 SSH 連線
+> ssh alias-name
+
+SSH 連線再附加其他指令
+> ssh alias-name mkdir wahaha
+
+scp 指定 SSH name
+> scp -r ./ alias-name:/var/www/html/project/
+
+如果出現以下錯誤訊息：
+
+`Bad owner or permissions on /home/user/.ssh/config`
+
+請將 config 檔案設置比較小的權限：
+
+> chmod 600 config
