@@ -20,3 +20,9 @@ adb shell pm grant com.name.app android.permission.READ_PROFILE
 
 adb shell pm revoke com.name.app android.permission.READ_PROFILE
 ```
+
+## adb 設定語系/語言
+
+```sh
+adb shell am start -a android.settings.LOCALE_SETTINGS
+```
