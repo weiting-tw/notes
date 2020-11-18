@@ -31,7 +31,7 @@ IIS Crypto is a free tool that gives administrators the ability to enable or dis
 
 2. 修改專案底下 `.vs/config`
 
-    Edit bindingInformation \<ip-address\>\:\<port\>\:\<host-name\>
+    Edit bindingInformation `<ip-address>:<port>:<host-name>`
 
     ```diff
         <site name="GSS.Duck.WebApi" id="2">
