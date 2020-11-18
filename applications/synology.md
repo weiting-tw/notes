@@ -205,3 +205,13 @@ Usage: synoservice
                                                                 Type may be {file_protocol|application}
                                                                 Sleep $buffer seconds before exec the command (default is 0)
 ```
+
+## docker 免 sudo
+
+Add user to docker group:
+
+> synogroup --add docker <your_username>
+
+Change ownership of docker socket to the docker group:
+
+> chown root:docker /var/run/docker.sock
