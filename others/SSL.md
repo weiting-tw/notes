@@ -19,6 +19,10 @@ dns_cloudflare_api_key = <your apiKey>
 
 > certbot -i certbot-dns-cloudflare
 
+or
+
+> pip3 install certbot-dns-cloudflare
+
 ### chmod
 
 > chmod 700 ~/.secrets/certbot/cloudflare.ini
