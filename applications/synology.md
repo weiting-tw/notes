@@ -21,7 +21,37 @@ sudo ./certbot-auto certonly \
 -d '*.weiting.me' -d weiting.me
 ```
 
-## 重啟服務
+## 使用 acme.sh 簽憑證
+
+### create
+
+```sh
+docker run -it --rm -v /Users/weiting/docker/acme.sh:/acme.sh neilpang/acme.sh --issue --dns dns_cf -d "*.weiting.me" -d weiting.me --debug
+```
+
+### renew
+
+```sh
+docker run -it --rm -v /volume1/docker/acme.sh:/acme.sh neilpang/acme.sh --renew-all --force
+```
+
+### update SSL & reload service
+
+須更新 xxx 位置
+
+```sh
+sleep 2m
+rsync -avh "/volume1/docker/acme.sh/*.weiting.me/*.weiting.me.cer" "/usr/syno/etc/certificate/_archive/xxx/cert.pem"
+rsync -avh "/volume1/docker/acme.sh/*.weiting.me/*.weiting.me.key" "/usr/syno/etc/certificate/_archive/xxx/privkey.pem"
+rsync -avh "/volume1/docker/acme.sh/*.weiting.me/fullchain.cer" "/usr/syno/etc/certificate/_archive/xxx/fullchain.pem"
+rsync -avh "/volume1/docker/acme.sh/*.weiting.me/ca.cer" "/usr/syno/etc/certificate/_archive/xxx/chain.pem"
+/usr/syno/etc/rc.sysv/nginx.sh reload
+# or
+synoservice --reload nginx
+synoservice --reload pkgctl-Apache2.4
+```
+
+## 重啟服務 Command
 
 Command:
 > synoservice
