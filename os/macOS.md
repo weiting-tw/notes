@@ -52,6 +52,14 @@ brew cask outdated
 brew cask upgrade
 ```
 
+### [Fix casks with `depends_on`](https://github.com/Homebrew/homebrew-cask/issues/**58046**)
+
+If you get an error of the type Error: Cask 'hex-fiend-beta' definition is invalid: invalid 'depends_on macos' value: ":lion", where hex-fiend-beta can be any cask name, and :lion any macOS release name, run the following command:
+
+```sh
+/usr/bin/find "$(brew --prefix)/Caskroom/"*'/.metadata' -type f -name '*.rb' -print0 | /usr/bin/xargs -0 /usr/bin/perl -i -pe 's/depends_on macos: \[.*?\]//gsm;s/depends_on macos: .*//g'
+```
+
 ## 修復 Dock 上的 icon 遺失
 
 * 先從 Applications 內，將該app拖移到 Dock
