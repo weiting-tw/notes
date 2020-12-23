@@ -1,5 +1,8 @@
 # SSH
 
+Secure Shell is a protocol used to securely log onto remote systems.
+It can be used for logging or executing commands on a remote server.
+
 ## Windows Server 2016 install Open-SSH
 
 1. Download [Win32-OpenSSH](https://github.com/PowerShell/Win32-OpenSSH/releases)
@@ -64,3 +67,73 @@ scp 指定 SSH name
 請將 config 檔案設置比較小的權限：
 
 > chmod 600 config
+
+## ssh-keygen 常用參數詳解
+
+ssh-keygen是SSH服務下的一個生成、管理和轉換認證密鑰的命令工具。包括兩種密鑰類型DSA和RSA
+通過公私鑰的驗證可以使服務器與服務器之間實現無密碼通訊。
+ssh-keygen常用參數
+
+```sh
+-t：指定生成密鑰的類型，默認使用SSH2d的rsa
+-f：指定生成密鑰的文件名，默認id_rsa（私鑰id_rsa，公鑰id_rsa.pub）
+-P：提供舊密碼，空表示不需要密碼（-P ‘’）
+-N：提供新密碼，空表示不需要密碼(-N ‘’)
+-b：指定密鑰長度（bits），RSA最小要求768位，默認是2048位；DSA密鑰必須是1024位（FIPS 1862標準規定）
+-C：提供一個新註釋
+-R hostname：從known_hosta（第一次連接時就會在家目錄.ssh目錄下生產該密鑰文件）文件中刪除所有屬於hostname的密鑰
+```
+
+```sh
+ssh-keygen -t ed25519 -C "<comment>"
+```
+
+## Arguments
+
+- 連到 remote_host:
+
+```sh
+ssh username@remote_host
+```
+
+- 使用指定 `私鑰` 連到 remote_host:
+
+```sh
+ssh -i path/to/key_file username@remote_host
+```
+
+- 使用指定 port 連到 remote_host:
+
+```sh
+ssh username@remote_host -p 2222
+```
+
+- 在 remote_host 上執行 command:
+
+```sh
+ssh remote_host command -with -flags
+```
+
+- SSH tunneling: Dynamic port forwarding (SOCKS proxy on localhost:9999):
+
+```sh
+ssh -D 9999 -C username@remote_host
+```
+
+- SSH tunneling: Forward a specific port (localhost:9999 to example.org:80) along with disabling pseudo-[t]ty allocation and executio[n] of remote commands:
+
+```sh
+ssh -L 9999:example.org:80 -N -T username@remote_host
+```
+
+- SSH jumping: Connect through a jumphost to a remote server (Multiple jump hops may be specified separated by comma characters):
+
+```sh
+ssh -J username@jump_host username@remote_host
+```
+
+- Agent forwarding: Forward the authentication information to the remote machine (see `man ssh_config` for available options):
+
+```sh
+ssh -A username@remote_host
+```
