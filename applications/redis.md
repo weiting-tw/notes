@@ -4,13 +4,13 @@
 
 ### [Docker](https://github.com/docker-library/redis)
 
-```sh
+```bash
 docker run -p 6379:6379 redis:alpine
 ```
 
 ### [Ubuntu](https://launchpad.net/~chris-lea/+archive/ubuntu/redis-server)
 
-```sh
+```bash
 sudo add-apt-repository ppa:chris-lea/redis-server
 sudo apt update
 sudo apt install redis
@@ -27,7 +27,7 @@ sudo systemctl start redis
 
 > Memurai 開發者版本有每隔 10 天就需要重啟服務的限制
 
-```powershell
+```text
 # 設定系統排程每隔 9 天自動重啟 Memurai 服務
 Register-ScheduledTask -TaskName RestartMemurai `
 -Trigger (New-JobTrigger -Daily -At 0am -DaysInterval 9) `
@@ -41,7 +41,7 @@ Register-ScheduledTask -TaskName RestartMemurai `
 
 ## [常用指令](http://redis.io/commands)
 
-```sh
+```bash
 # 查詢指令用法
 redis-cli help
 
@@ -125,7 +125,7 @@ redis-cli -h redis1 -p 6380 slaveof redis2 6379
 
 # 強制在背景將記憶體資料寫入檔案 (預設為 /var/lib/redis/dump.rdb)
 redis-cli bgsave
- 
+
 ## https://redis.io/commands/flushdb
 
 # 清空資料庫(預設為 0)
@@ -155,7 +155,7 @@ redis-server 2.8 之後內建的 Sentinel 服務用於管理多個 redis 節點,
 
 `/etc/redis/sentinel.conf`
 
-```sh
+```bash
 # port <監聽連接埠>
 port 26379
 
@@ -187,13 +187,13 @@ sentinel parallel-syncs mymaster 1
 
 範例如下
 
-```sh
+```bash
 rump -from redis://127.0.0.1:6379/0 -to redis://redis.rxyf8n.ng.0001.apne1.cache.amazonaws.com:6379/0 -ttl
 ```
 
 ### [正確地使用 .NET 用戶端連接 Redis](https://azure.microsoft.com/documentation/articles/cache-dotnet-how-to-use-azure-redis-cache/)
 
-建議利用 NuGet 安裝 [StackExchange.Redis](https://www.nuget.org/packages/StackExchange.Redis/) 套件
+建議利用 NuGet 安裝 [StackExchange.Redis](https://www.nuget.org/packages/StackExchange.Redis/) 套件
 
 使用範例:
 
@@ -246,3 +246,4 @@ SCAN 0 COUNT 1000 MATCH *
 # Delete
 DEL key1 key2 key3...
 ```
+

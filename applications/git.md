@@ -4,7 +4,7 @@
 
 啟用二階段驗證時，會無法push到server上
 
-```sh
+```bash
 > git push
 Username for 'https://github.com': a26007565
 Password for 'https://a26007565@github.com':
@@ -15,11 +15,12 @@ fatal: Authentication failed for 'https://github.com/a26007565/notes.git/'
 解決方法:
 
 1. git config –global credential.helper store
-2. Settings => Personal access tokens
-3. Generate new token => token的範圍選repo就夠了 => click Generate Token
+2. Settings =&gt; Personal access tokens
+3. Generate new token =&gt; token的範圍選repo就夠了 =&gt; click Generate Token
 4. 再次輸入：git push，輸入帳號，再密碼的地方輸入token就行了
 
 **備註** 訊息會存在
+
 > ~/.git-credentials
 
 ## Generating a new SSH key
@@ -28,63 +29,62 @@ Open Git Bash.
 
 Paste the text below, substituting in your GitHub email address.
 
-```sh
+```bash
 ssh-keygen -t rsa -b 4096 -C <your_email@example.com>
 ```
 
 This creates a new ssh key, using the provided email as a label.
 
-```sh
+```bash
 Generating public/private rsa key pair.
 ```
 
 When you're prompted to "Enter a file in which to save the key," press Enter. This accepts the default file location.
 
-```sh
+```bash
 Enter a file in which to save the key (/c/Users/you/.ssh/id_rsa):[Press enter]
 ```
 
 At the prompt, type a secure passphrase. For more information, see "Working with SSH key passphrases".
 
-```sh
+```bash
 Enter passphrase (empty for no passphrase): [Type a passphrase]
 Enter same passphrase again: [Type passphrase again]
 ```
 
 ## Adding your SSH key to the ssh-agent
 
-Before adding a new SSH key to the ssh-agent to manage your keys, you should have checked for existing SSH keys and [generated a new SSH key](#generating-a-new-ssh-key).
-When adding your SSH key to the agent, use the default macOS ssh-add command, and not an application installed by `macports`, [`homebrew`](../os/macOS.md#Homebrew-套件管理工具), or some other external source.
+Before adding a new SSH key to the ssh-agent to manage your keys, you should have checked for existing SSH keys and [generated a new SSH key](git.md#generating-a-new-ssh-key). When adding your SSH key to the agent, use the default macOS ssh-add command, and not an application installed by `macports`, [`homebrew`](../os/macos.md#Homebrew-套件管理工具), or some other external source.
 
 Start the ssh-agent in the background.
 
-```sh
+```bash
 eval "$(ssh-agent -s)"
 Agent pid 59566
 ```
 
 If you're using macOS Sierra 10.12.2 or later, you will need to modify your `~/.ssh/config` file to automatically load keys into the ssh-agent and store passphrases in your keychain.
 
-```sh
+```bash
 Host *
  AddKeysToAgent yes
  UseKeychain yes
  IdentityFile ~/.ssh/id_rsa
 ```
 
-Add your SSH private key to the ssh-agent and store your passphrase in the keychain. If you created your key with a different name, or if you are adding an existing key that has a different name, replace id_rsa in the command with the name of your private key file.
+Add your SSH private key to the ssh-agent and store your passphrase in the keychain. If you created your key with a different name, or if you are adding an existing key that has a different name, replace id\_rsa in the command with the name of your private key file.
 
-> ssh-add -K ~/.ssh/id_rsa
+> ssh-add -K ~/.ssh/id\_rsa
 
 Note: The -K option is Apple's standard version of ssh-add, which stores the passphrase in your keychain for you when you add an ssh key to the ssh-agent.
 
-If you don't have Apple's standard version installed, you may receive an error. For more information on resolving this error, see "[Error: ssh-add: illegal option -- K](https://help.github.com/articles/error-ssh-add-illegal-option-k)."*
+If you don't have Apple's standard version installed, you may receive an error. For more information on resolving this error, see "[Error: ssh-add: illegal option -- K](https://help.github.com/articles/error-ssh-add-illegal-option-k)."\*
 
 ## 救回 Commit
 
 誤 reset 時，使用 `reflog` 觀看 git 的歷程
 
-```sh
+```bash
 > git reflog
 657fce7 (HEAD -> master) HEAD@{0}: reset: moving to HEAD~2
 e12d8ef (origin/master, origin/HEAD, cat) HEAD@{1}: checkout: moving from cat to master
@@ -93,17 +93,17 @@ e12d8ef (origin/master, origin/HEAD, cat) HEAD@{2}: checkout: moving from master
 
 指定 Commit 即可救回
 
-```sh
+```bash
 > git reset e12d8ef --hard
 ```
 
 ## 對底下的所有資料夾執行 git 指令
 
-使用 npm 的套件 [gitfox](!https://github.com/aibeb/gitfox)
+使用 npm 的套件 [gitfox](https://github.com/a26007565/notes/tree/c5e66e7fa322b1ea366d2a041ba68edbde4fa419/applications/!https:/github.com/aibeb/gitfox/README.md)
 
 使用方法
 
-```sh
+```bash
 g <command> [<parent-dir>]
 g 'config core.filemode false'
 g 'fetch --all'
@@ -111,12 +111,11 @@ g 'fetch --all'
 
 ## 複製整個資料夾到另外一個磁碟出現檔案已被修改
 
-可能是因為檔案權限被異動
-like `755=rwxr-xr-x` to `644=rw-r--r--`
+可能是因為檔案權限被異動 like `755=rwxr-xr-x` to `644=rw-r--r--`
 
 Suggests setting core.filemode to false.
 
-```sh
+```bash
 git config core.filemode false
 git config core.filemode false --global
 ```
@@ -125,25 +124,25 @@ git config core.filemode false --global
 
 First, list all branches that were merged in remote.
 
-```sh
+```bash
 git branch --merged
 ```
 
 You might see few branches you don't want to remove. we can add few arguments to skip important branches that we don't want to delete like master or a develop. The following command will skip master branch and anything that has dev in it.
 
-```sh
+```bash
 git branch --merged| egrep -v "(^\*|master|dev)"
 ```
 
-If you want to skip, you can add it to the egrep command like the following. The branch skip_branch_name will not be deleted.
+If you want to skip, you can add it to the egrep command like the following. The branch skip\_branch\_name will not be deleted.
 
-```sh
+```bash
 git branch --merged| egrep -v "(^\*|master|dev|skip_branch_name)"
 ```
 
 To delete all local branches that are already merged into the currently checked out branch:
 
-```sh
+```bash
 git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d
 ```
 
@@ -151,19 +150,19 @@ You can see that master and dev are excluded in case they are an ancestor.
 
 You can delete a merged local branch with:
 
-```sh
+```bash
 git branch -d branchname
 ```
 
 If it's not merged, use:
 
-```sh
+```bash
 git branch -D branchname
 ```
 
 To delete it from the remote use:
 
-```sh
+```bash
 git push --delete origin branchname
 
 git push origin :branchname    # for really old git
@@ -171,13 +170,13 @@ git push origin :branchname    # for really old git
 
 Once you delete the branch from the remote, you can prune to get rid of remote tracking branches with:
 
-```sh
+```bash
 git remote prune origin
 ```
 
 or prune individual remote tracking branches, as the other answer suggests, with:
 
-```sh
+```bash
 git branch -dr branchname
 ```
 
@@ -189,21 +188,25 @@ git branch -dr branchname
 
 該網站其實主要也只有兩個端點可用：
 
-- 列出所有範本清單
-  > https://www.gitignore.io/api/list
+* 列出所有範本清單
 
-- 取得特定範本內容
-  > https://www.gitignore.io/api/{types}
+  > [https://www.gitignore.io/api/list](https://www.gitignore.io/api/list)
 
-- 例如你要取得 VisualStudio 範本的內容，就可以直接呼叫
-  > https://www.gitignore.io/api/visualstudio
+* 取得特定範本內容
 
-- 如果你想取得 dart 與 flutter 的範本，就可以直接呼叫
-  > https://www.gitignore.io/api/dart,flutter
+  > [https://www.gitignore.io/api/{types}](https://www.gitignore.io/api/{types})
+
+* 例如你要取得 VisualStudio 範本的內容，就可以直接呼叫
+
+  > [https://www.gitignore.io/api/visualstudio](https://www.gitignore.io/api/visualstudio)
+
+* 如果你想取得 dart 與 flutter 的範本，就可以直接呼叫
+
+  > [https://www.gitignore.io/api/dart,flutter](https://www.gitignore.io/api/dart,flutter)
 
 shell
 
-```shell
+```text
 git config --global alias.ignore "!gi() { curl -sL https://www.gitignore.io/api/$@ ;}; gi"
 ```
 
@@ -215,17 +218,21 @@ bash
 git config --global alias.ignore '!'"gi() { curl -sL https://www.gitignore.io/api/\$@ ;}; gi"
 ```
 
-- 取得範本清單
+* 取得範本清單
+
   > git ignore list
 
-- 下載 VisualStudio 範本
-  > git ignore visualstudio > .gitignore
+* 下載 VisualStudio 範本
 
-- 同時下載 VisualStudio 與 ASPNETCore 範本
-  > git ignore visualstudio,aspnetcore > .gitignore
+  > git ignore visualstudio &gt; .gitignore
+
+* 同時下載 VisualStudio 與 ASPNETCore 範本
+
+  > git ignore visualstudio,aspnetcore &gt; .gitignore
 
 ### 快速調整 Git 設定的小工具
 
 [@willh/git-setup](https://www.npmjs.com/package/@willh/git-setup) 會全自動設定 Git 版控環境，並且跨平台支援 Windows, Linux, macOS 等作業系統的命令列環境，尤其針對中文環境經常會出現亂碼的問題都會完整的解決。
 
 > npx @willh/git-setup
+

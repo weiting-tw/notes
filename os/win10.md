@@ -4,8 +4,7 @@
 
 將 port 80 導向 59600
 
-```sh
-
+```bash
 // 新增
 > netsh interface portproxy add v4tov4 listenport=80 listenaddress=* connectport=59600 connectaddress=127.0.0.1
 
@@ -20,5 +19,5 @@
 
 // 刪除
 netsh interface portproxy delete v4tov4 listenport=80 listenaddress=*
-
 ```
+

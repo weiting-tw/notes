@@ -4,18 +4,19 @@
 
 `Windows` 環境下
 
-```powershell
+```text
 ipconfig /flushdns
 ```
 
 `Mac OSX` 環境下
 
-```sh
+```bash
 dscacheutil -flushcache
 ```
 
 `Linux` 環境下
 
-```sh
+```bash
 /etc/init.d/nscd restart
 ```
+

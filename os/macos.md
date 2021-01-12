@@ -4,13 +4,13 @@
 
 xargs 的命令一次會被調用 2000~ 4000次左右，因此，如果列出的log有一萬筆的話，可能就會被分成 3到 5次左右來執行，因而避開了 Argument list too long 的錯誤。
 
-```sh
+```bash
 find . -name "*.log" | xargs rm
 ```
 
 ## [Homebrew](http://brew.sh/) 套件管理工具
 
-```sh
+```bash
 # 安裝 Homebrew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 # 顯示使用說明
@@ -31,7 +31,7 @@ brew cleanup
 
 ### [Homebrew Cask](https://caskroom.github.io) 應用程式管理工具
 
-```sh
+```bash
 # 安裝 Homebrew Cask
 brew tap caskroom/cask
 # 顯示使用說明
@@ -54,29 +54,23 @@ brew cask upgrade
 
 ### [Fix casks with `depends_on`](https://github.com/Homebrew/homebrew-cask/issues/**58046**)
 
-If you get an error of the type Error: Cask 'hex-fiend-beta' definition is invalid: invalid 'depends_on macos' value: ":lion", where hex-fiend-beta can be any cask name, and :lion any macOS release name, run the following command:
+If you get an error of the type Error: Cask 'hex-fiend-beta' definition is invalid: invalid 'depends\_on macos' value: ":lion", where hex-fiend-beta can be any cask name, and :lion any macOS release name, run the following command:
 
-```sh
+```bash
 /usr/bin/find "$(brew --prefix)/Caskroom/"*'/.metadata' -type f -name '*.rb' -print0 | /usr/bin/xargs -0 /usr/bin/perl -i -pe 's/depends_on macos: \[.*?\]//gsm;s/depends_on macos: .*//g'
 ```
 
 ## 修復 Dock 上的 icon 遺失
 
 * 先從 Applications 內，將該app拖移到 Dock
-
 * 若不行的話，將電腦進入[安全模式](https://support.apple.com/HT201262)，會清掉 low-level caches
-
-1. 關機
-    ![image](https://cdn1.tekrevue.com/wp-content/uploads/2018/03/Shut-Down.jpg)
-
-2. 開機時按住shift，直到開機完成
-    ![image](https://cdn1.tekrevue.com/wp-content/uploads/2018/03/Shift-Key.jpg)
-
-3. 正常重新開機
+* 關機 ![image](https://cdn1.tekrevue.com/wp-content/uploads/2018/03/Shut-Down.jpg)
+* 開機時按住shift，直到開機完成 ![image](https://cdn1.tekrevue.com/wp-content/uploads/2018/03/Shift-Key.jpg)
+* 正常重新開機
 
 ## 完整反安裝 Xcode
 
-```sh
+```bash
 /Apllications/Xcode.app
 /Library/Preferences/com.apple.dt.Xcode.plist
 ~/Library/Preferences/com.apple.dt.Xcode.plist
@@ -86,21 +80,21 @@ If you get an error of the type Error: Cask 'hex-fiend-beta' definition is inval
 
 ## 安裝 Xcode Command Line 開發者套件而不安裝 XCode
 
-```sh
+```bash
 sudo xcode-select --install
 ```
 
-## 刪除 .DS_Store
+## 刪除 .DS\_Store
 
-```sh
+```bash
 find . -type f -name ".DS_Store" -o -name "._*" -delete
 ```
 
 ## 不要在網路磁碟上自動產生 `.DS_Store`
 
-> .DS_Store 會用來儲存目錄圖示狀態
+> .DS\_Store 會用來儲存目錄圖示狀態
 
-```sh
+```bash
 defaults write com.apple.desktopservices DSDontWriteNetworkStores true
 ```
 
@@ -110,34 +104,37 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores true
 
 1. 編輯 /etc/syslog.conf
 
-    在這個檔案裡加上下面一行：
+   在這個檔案裡加上下面一行：
 
-    ```sh
+   ```bash
     sudo cron.* /var/log/cron.log
-    ```
+   ```
 
 2. 重新啟動 syslogd
 
-    執行下面的兩行指令，重新指動 syslod：
+   執行下面的兩行指令，重新指動 syslod：
 
-    ```sh
+   ```bash
     sudo launchctl unload /System/Library/LaunchDaemons/com.apple.syslogd.plist
     sudo launchctl load /System/Library/LaunchDaemons/com.apple.syslogd.plist
-    ```
+   ```
 
 3. 檢查 /var/log/cron.log
 
-    等 cron job 的時間到了之後，應該就能看到 `/var/log/cron.log` 了
+   等 cron job 的時間到了之後，應該就能看到 `/var/log/cron.log` 了
 
 ## QuickLook
 
 Folder path:
-> /Library/QuickLook/
-> /Users/$(whoami)/Library/QuickLook/
+
+> /Library/QuickLook/ /Users/$\(whoami\)/Library/QuickLook/
 
 * [QuicklookStephen](https://github.com/whomwah/qlstephen)
+
   QLStephen is a QuickLook plugin that lets you view plain text files without a file extension. Files like:`README`, `INSTALL`, `Capfile`, `CHANGELOG`, etc...
+
 * [QLMarkdown](https://github.com/toland/qlmarkdown)
+
   QuickLook generator for Markdown files.
 
 ## Beyond compare
@@ -185,7 +182,7 @@ gitNameChange2Weiting() {
   OLD_EMAIL="wilber_chen@gss.com.tw"
   CORRECT_NAME="weiting"
   CORRECT_EMAIL="a26007565@gmail.com"
-  
+
   if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]
   then
   export GIT_COMMITTER_NAME="$CORRECT_NAME"
@@ -199,3 +196,4 @@ gitNameChange2Weiting() {
   ' --tag-name-filter cat -- --branches --tags
 }
 ```
+

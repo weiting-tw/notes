@@ -1,10 +1,10 @@
-# GitLab CI
+# GitLab-CI
 
 ## yml example
 
 ### .Net Core
 
-```yml
+```text
 image: mcr.microsoft.com/dotnet/core/sdk:3.1
 
 stages:
@@ -27,7 +27,7 @@ test:
 
 ### JavaScript
 
-```yml
+```text
 image: node:8
 
 stages:
@@ -66,7 +66,7 @@ pages:
     - master
 ```
 
-```yml
+```text
 image: node:8
 
 stages:
@@ -135,14 +135,14 @@ cache:
 
 Consider the following workflow:
 
-- Your master branch is rock solid, your project is using GitLab CI/CD and your pipelines indicate that there isn’t anything broken.
-- Someone from your team submits a merge request, a test fails and the pipeline gets the known red icon. To investigate more, you have to go through the job logs to figure out the cause of the failed test, - which usually contain thousands of lines.
-- You configure the JUnit test reports and immediately GitLab collects and exposes them in the merge request. No more searching in the job logs.
-- Your development and debugging workflow becomes easier, faster and efficient.
+* Your master branch is rock solid, your project is using GitLab CI/CD and your pipelines indicate that there isn’t anything broken.
+* Someone from your team submits a merge request, a test fails and the pipeline gets the known red icon. To investigate more, you have to go through the job logs to figure out the cause of the failed test, - which usually contain thousands of lines.
+* You configure the JUnit test reports and immediately GitLab collects and exposes them in the merge request. No more searching in the job logs.
+* Your development and debugging workflow becomes easier, faster and efficient.
 
 #### .Net Core
 
-```yml
+```text
 ## Source code and documentation are here: https://github.com/spekt/junit.testlogger/
 
 Test:
@@ -164,7 +164,7 @@ Test:
 
 Produces JUnit-style XML test results.
 
-```yml
+```text
 test:
   script:
   - npx mocha test--reporter mocha-junit-reporter
@@ -180,7 +180,7 @@ test:
 
 If JUnit XML files are generated and uploaded as part of a pipeline, these reports can be viewed inside the pipelines details page. The Tests tab on this page will display a list of test suites and cases reported from the XML file.
 
-![junit-test-reports](/images/gitlab/junit-test-reports.png)
+![junit-test-reports](../.gitbook/assets/junit-test-reports.png)
 
 ## [MinIO](https://min.io/)
 
@@ -188,7 +188,7 @@ MinIO is High Performance Object Storage released under Apache License v2.0. It 
 
 ### [Install with docker](https://docs.min.io/docs/minio-docker-quickstart-guide.html)
 
-```sh
+```bash
 docker run -it --restart always -p 9005:9000 \
     --name minio \
     -e "MINIO_ACCESS_KEY=YOUR_ACCESS_KEY" \
@@ -199,7 +199,7 @@ docker run -it --restart always -p 9005:9000 \
 
 ### [Set gitlab-runner config](https://docs.gitlab.com/runner/configuration/autoscale.html#distributed-runners-caching)
 
-```toml
+```text
 [[runners]]
   limit = 10
   executor = "docker+machine"
@@ -214,3 +214,4 @@ docker run -it --restart always -p 9005:9000 \
       BucketName = "runner"
       Insecure = false # using https
 ```
+

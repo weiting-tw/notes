@@ -1,4 +1,5 @@
 # Azure
 
-* [Logic App](logicApp.md)
-* [Web App](webApp.md)
+* [Logic App](logicapp.md)
+* [Web App](webapp.md)
+

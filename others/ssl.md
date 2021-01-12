@@ -9,7 +9,7 @@
 
 ### create a credentials in `~/.secrets/certbot/cloudflare.ini`
 
-```ini
+```text
 # Cloudflare API credentials used by Certbot
 dns_cloudflare_email = <your mail>
 dns_cloudflare_api_key = <your apiKey>
@@ -37,14 +37,14 @@ or
 
 ### set crontab
 
-```sh
+```bash
 # 每兩個月的1號執行
 0 0 1 */2 * certbot renew --quiet
 ```
 
 ### docker Run
 
-```sh
+```bash
 docker run -it \
 -v ~/letsencrypt/:/etc/letsencrypt \
 -v ~/.secrets/certbot/cloudflare.ini:/tmp/certbot/cloudflare.ini \
@@ -58,3 +58,4 @@ certbot/dns-cloudflare  certonly \
 ## pem to pfx
 
 > openssl pkcs12 -in cert.pem -inkey privkey.pem -export -out server.pfx
+

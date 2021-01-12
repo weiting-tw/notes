@@ -1,23 +1,21 @@
 # Fail2ban
 
-Fail2ban 是一套以 Python 語言所撰寫的 GPLv2 授權軟體，藉由分析系統紀錄檔，並透過設定過濾條件 (filter) 及動作 (action)，當符合我們所設定的過濾條件時，將觸發相對動作來達到自動化反應的效果 (如封鎖來源 IP、寄信通知管理者、查詢來源 IP 資訊等)
+Fail2ban 是一套以 Python 語言所撰寫的 GPLv2 授權軟體，藉由分析系統紀錄檔，並透過設定過濾條件 \(filter\) 及動作 \(action\)，當符合我們所設定的過濾條件時，將觸發相對動作來達到自動化反應的效果 \(如封鎖來源 IP、寄信通知管理者、查詢來源 IP 資訊等\)
 
 ## 設定檔說明
 
-- jail.(conf|local)
-  - 用來設定 jail，即是定義 filter 與 action 的對應關係。
-
-- filter.d/
-  - 用來定義過濾條件 (filter)，目錄下已定義多種既有的過濾條件，常見的軟體有 apache、sshd、vsftpd、postfix 等，而常見記錄檔格式也可能為 Syslog、Common Log Format 等。
-
-- action.d/
-  - 用來定義動作內容 (action)，目錄下已定義多種既有的動作內容，如「sendmail 寄信通知」、「iptables 阻擋來源位址」、「使用 whois 查詢來源 domain 資訊」或「自動通知該來源 IP 的管理者」。
+* jail.\(conf\|local\)
+  * 用來設定 jail，即是定義 filter 與 action 的對應關係。
+* filter.d/
+  * 用來定義過濾條件 \(filter\)，目錄下已定義多種既有的過濾條件，常見的軟體有 apache、sshd、vsftpd、postfix 等，而常見記錄檔格式也可能為 Syslog、Common Log Format 等。
+* action.d/
+  * 用來定義動作內容 \(action\)，目錄下已定義多種既有的動作內容，如「sendmail 寄信通知」、「iptables 阻擋來源位址」、「使用 whois 查詢來源 domain 資訊」或「自動通知該來源 IP 的管理者」。
 
 ### jail.local
 
 default
 
-```local
+```text
 [DEFAULT]
 #忽略 IP 的清單，以空白區隔不同 IP
 ignoreip = 127.0.0.1/8 192.168.1.0/24
@@ -31,7 +29,7 @@ maxretry = 3
 
 for bitwarden
 
-```local
+```text
 [bitwarden]
 enabled = true
 port = 80,443,8081
@@ -48,7 +46,7 @@ findtime = 14400
 
 for bitwarden
 
-```local
+```text
 [INCLUDES]
 before = common.conf
 
@@ -59,7 +57,7 @@ ignoreregex =
 
 ## Using Docker-compose
 
-```yml
+```text
 version: '3'
 services:
   fail2ban:
@@ -90,7 +88,7 @@ services:
 
 ## Commands
 
-```sh
+```bash
 #啟動 fail2ban
 systemctl start fail2ban
 
@@ -133,11 +131,11 @@ fail2ban-client set sshd unbanip xxx.xxx.xxx.xxx
 fail2ban-client set nginx-cc unbanip xxx.xxx.xxx.xxx
 ```
 
-for docker
-前面加上 `sudo docker exec -t fail2ban`
+for docker 前面加上 `sudo docker exec -t fail2ban`
 
 like:
 
-```sh
+```bash
 sudo docker exec -t fail2ban fail2ban-client set sshd unbanip xxx.xxx.xxx.xxx
 ```
+

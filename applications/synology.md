@@ -2,19 +2,19 @@
 
 ## 更新 cloudflare dns 位置 [SynologyCloudFlareDDNS](https://github.com/namukcom/SynologyCloudFlareDDNS)
 
-## Wildcard Certificate (使用[cerbot](https://certbot.eff.org))
+## Wildcard Certificate \(使用[cerbot](https://certbot.eff.org)\)
 
 ### 下載certbot 腳本
 
-```sh
+```bash
 wget https://dl.eff.org/certbot-auto
 chmod a+x ./certbot-auto
 sudo ./certbot-auto
 ```
 
-### 取得憑證，並放置 /usr/syno/etc/certificate/_archive/xxx
+### 取得憑證，並放置 /usr/syno/etc/certificate/\_archive/xxx
 
-```sh
+```bash
 sudo ./certbot-auto certonly \
 --server https://acme-v02.api.letsencrypt.org/directory \
 --manual --preferred-challenges dns \
@@ -25,13 +25,13 @@ sudo ./certbot-auto certonly \
 
 ### create
 
-```sh
+```bash
 docker run -it --rm -v /Users/weiting/docker/acme.sh:/acme.sh neilpang/acme.sh --issue --dns dns_cf -d "*.weiting.me" -d weiting.me --debug
 ```
 
 ### renew
 
-```sh
+```bash
 docker run -it --rm -v /volume1/docker/acme.sh:/acme.sh neilpang/acme.sh --renew-all --force
 ```
 
@@ -39,7 +39,7 @@ docker run -it --rm -v /volume1/docker/acme.sh:/acme.sh neilpang/acme.sh --renew
 
 須更新 xxx 位置
 
-```sh
+```bash
 sleep 2m
 rsync -avh "/volume1/docker/acme.sh/*.weiting.me/*.weiting.me.cer" "/usr/syno/etc/certificate/_archive/xxx/cert.pem"
 rsync -avh "/volume1/docker/acme.sh/*.weiting.me/*.weiting.me.key" "/usr/syno/etc/certificate/_archive/xxx/privkey.pem"
@@ -54,9 +54,8 @@ synoservice --reload pkgctl-Apache2.4
 ## 重啟服務 Command
 
 Command:
-> synoservice
-> synoservicectl
-> synoservicecfg
+
+> synoservice synoservicectl synoservicecfg
 
 service list
 
@@ -240,8 +239,9 @@ Usage: synoservice
 
 Add user to docker group:
 
-> synogroup --add docker <your_username>
+> synogroup --add docker
 
 Change ownership of docker socket to the docker group:
 
 > chown root:docker /var/run/docker.sock
+

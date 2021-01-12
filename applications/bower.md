@@ -1,4 +1,4 @@
-# [Bower](https://bower.io/) 已過時
+# Bower
 
 ## How to install
 
@@ -23,9 +23,7 @@ bower install http://example.com/script.js
 
 ### 使用npm的registry [bower-npm-reolver](https://github.com/mjeanroy/bower-npm-resolver)
 
-A [custom Bower resolver](http://bower.io/docs/pluggable-resolvers/) supporting installation of NPM packages.
-This resolver should be used if the package (or the version of the package you want to use) is not available on default
-resolvers (bower registry, github, etc.).
+A [custom Bower resolver](http://bower.io/docs/pluggable-resolvers/) supporting installation of NPM packages. This resolver should be used if the package \(or the version of the package you want to use\) is not available on default resolvers \(bower registry, github, etc.\).
 
 #### Install
 
@@ -37,7 +35,7 @@ npm install bower-npm-resolver
 
 Add the resolver in your `.bowerrc` file:
 
-```json
+```javascript
 {
   "resolvers": [
     "bower-npm-resolver"
@@ -47,7 +45,7 @@ Add the resolver in your `.bowerrc` file:
 
 Once configured, your `bower.json` files may reference packages using `npm:` prefix:
 
-```json
+```javascript
 {
   "dependencies": {
     "jquery": "npm:jquery#1.0.0",
@@ -59,3 +57,4 @@ Once configured, your `bower.json` files may reference packages using `npm:` pre
 Note that you can also specify scope package:
 
 #### [With detail settings](https://github.com/mjeanroy/bower-npm-resolver/blob/master/README.md)
+

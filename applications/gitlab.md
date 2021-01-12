@@ -2,27 +2,27 @@
 
 ## 自訂網域 with cloudflare
 
-### STEP 1. Add DNS Record (CNAME)
+### STEP 1. Add DNS Record \(CNAME\)
 
-![add dns record](../images/gitlab/cloudflare-dns.png)
+![add dns record](../.gitbook/assets/cloudflare-dns.png)
 
 ### STEP 2. Generate your certificate
 
 #### Copy the PEM certificate and the private key from cloudflare
 
-> 設定 > 頁面 > + New Domain
+> 設定 &gt; 頁面 &gt; + New Domain
 
 #### Enabled
 
-- [x] Force domains with SSL certificates to use HTTPS
+* [x] Force domains with SSL certificates to use HTTPS
 
-![add-certificate-to-pages](../images/gitlab/add-certificate-to-pages.png)
+![add-certificate-to-pages](../.gitbook/assets/add-certificate-to-pages.png)
 
 ### STEP 3. Copy CloudFlare's Origin CA — RSA Root
 
 CloudFlare doesn't combine both PEM and root certificates in one.
 
-```txt
+```text
 -----BEGIN CERTIFICATE-----
 MIID/DCCAuagAwIBAgIID+rOSdTGfGcwCwYJKoZIhvcNAQELMIGLMQswCQYDVQQG
 EwJVUzEZMBcGA1UEChMQQ2xvdWRGbGFyZSwgSW5jLjE0MDIGA1UECxMrQ2xvdWRG
@@ -51,23 +51,23 @@ Fu6q54beR89jDc+oABmOgg==
 
 like:
 
-![add-intermediate-certificate](../images/gitlab/add-intermediate-certificate.png)
+![add-intermediate-certificate](../.gitbook/assets/add-intermediate-certificate.png)
 
-- ref: <https://gitlab.com/help/user/project/pages/getting_started_part_three.md#dns-txt-record>
+* ref: [https://gitlab.com/help/user/project/pages/getting\_started\_part\_three.md\#dns-txt-record](https://gitlab.com/help/user/project/pages/getting_started_part_three.md#dns-txt-record)
 
-### STEP 4. Set DNS Record (TXT) for verification
+### STEP 4. Set DNS Record \(TXT\) for verification
 
-![cloudflare-txt](../images/gitlab/cloudflare-txt.png)
+![cloudflare-txt](../.gitbook/assets/cloudflare-txt.png)
 
 ### STEP 5. Finally
 
-![success](../images/gitlab/success.png)
+![success](../.gitbook/assets/success.png)
 
 ## 使用 Gitlab Pages
 
 在使用Pages時，baseUrl需要設定為projectName，才可正確載入js檔案
 
-```js
+```javascript
 module.exports = {
   baseUrl: process.env.NODE_ENV === 'production'
     ? '/yourProjectName/'
@@ -77,13 +77,13 @@ module.exports = {
 
 ## GitLab 的 CI/CD 配置管理
 
-<http://blog.51cto.com/flyfish225/2156602>
+[http://blog.51cto.com/flyfish225/2156602](http://blog.51cto.com/flyfish225/2156602)
 
 ## GitLab CI submodule update
 
 ssh private key add to environment variable
 
-```yml
+```text
 image: ubuntu
 
 before_script:
@@ -97,7 +97,7 @@ before_script:
   ## Run ssh-agent (inside the build environment)
   ##
   - eval $(ssh-agent -s)
-  
+
   ##
   ## Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
   ## We're using tr to fix line endings which makes ed25519 keys work
@@ -124,5 +124,5 @@ Test SSH:
   script:
   # try to connect to GitLab.com
   - ssh git@gitlab.com
-
 ```
+

@@ -4,14 +4,14 @@
 
 ### Purging All Unused or Dangling Images, Containers, Volumes, and Networks
 
-```sh
+```bash
 # all & force
 docker system prune -af
 ```
 
 ### Remove one or more specific images
 
-```sh
+```bash
 # images
 docker images -a
 
@@ -21,7 +21,7 @@ docker rmi Image Image
 
 ### Removing Containers
 
-```sh
+```bash
 # containers
 docker ps -a
 
@@ -31,7 +31,7 @@ docker rm ID_or_Name ID_or_Name
 
 ### Remove all exited containers
 
-```sh
+```bash
 # exited containers
 docker ps -a -f status=exited
 
@@ -41,7 +41,7 @@ docker rm $(docker ps -a -f status=exited -q)
 
 ### Removing Volumes
 
-```sh
+```bash
 # Volumes
 docker volume ls
 
@@ -53,7 +53,7 @@ docker volume rm volume_name volume_name
 
 docker安裝後預設沒有daemon.json這個配置檔案，需要進行手動建立。配置檔案的預設路徑：`/etc/docker/daemon.json`
 
-```json
+```javascript
 {
   "api-cors-header":"", 
   "authorization-plugins":[],
@@ -146,16 +146,18 @@ docker安裝後預設沒有daemon.json這個配置檔案，需要進行手動建
 ## 修改容器的 DNS 伺服器
 
 檢視容器的 dns 解析設定檔案, 也可以檢查docker 執行環境 DNS
+
 > docker run busybox:latest cat /etc/resolv.conf
 
 為容器 mybusybox 執行手動設定一個dns伺服器, 並檢查是否生效
+
 > docker run --dns 10.0.0.2 --name mybusybox busybox:latest cat /etc/resolv.conf
 
-定製化容器執行環境的 dns 伺服器,
-在Host OS上編輯下面檔案, 增加dns 伺服器, 並重啟docker 服務.
+定製化容器執行環境的 dns 伺服器, 在Host OS上編輯下面檔案, 增加dns 伺服器, 並重啟docker 服務.
+
 > cat /etc/docker/daemon.json
 
-```sh
+```bash
 {
   "dns" : [
     "8.8.8.8"
@@ -164,16 +166,18 @@ docker安裝後預設沒有daemon.json這個配置檔案，需要進行手動建
 ```
 
 重啟服務
+
 > sudo service docker restart
 
 ## 複製容器內資料
 
-```sh
+```bash
 docker cp <containId>:<path> <toPath>
 ```
 
 ## 載入 volume
 
-```sh
+```bash
 docker run -it --rm -v <volumeId>:/data node bash
 ```
+

@@ -1,8 +1,8 @@
-# Applications
+# 應用程式
 
-* [Azure](azure/README.md)
-  * [Logic App](azure/logicApp.md)
-  * [Web Apps](azure/webApp.md)
+* [Azure](azure/)
+  * [Logic App](azure/logicapp.md)
+  * [Web Apps](azure/webapp.md)
 * [Android](android.md)
 * [Bower](bower.md)
 * [Curl](curl.md)
@@ -14,11 +14,12 @@
 * [GitLab-CI](gitlab-ci.md)
 * [GitLab](gitlab.md)
 * [GPG](gpg.md)
-* [Home Assistant](homeAssistant.md)
+* [Home Assistant](homeassistant.md)
 * [IIS](iis.md)
 * [Ngrok](ngrok.md)
 * [Npm](npm.md)
 * [Redis](redis.md)
 * [SSH](ssh.md)
 * [Synology](synology.md)
-* [Web](withWeb.md)
+* [Web](withweb.md)
+
