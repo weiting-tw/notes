@@ -23,19 +23,19 @@ sudo ./certbot-auto certonly \
 
 ## 使用 acme.sh 簽憑證
 
-### create
+### Create
 
 ```bash
 docker run -it --rm -v /Users/weiting/docker/acme.sh:/acme.sh neilpang/acme.sh --issue --dns dns_cf -d "*.weiting.me" -d weiting.me --debug
 ```
 
-### renew
+### Renew
 
 ```bash
 docker run -it --rm -v /volume1/docker/acme.sh:/acme.sh neilpang/acme.sh --renew-all --force
 ```
 
-### update SSL & reload service
+### Update SSL & reload service
 
 須更新 xxx 位置
 
@@ -239,9 +239,13 @@ Usage: synoservice
 
 Add user to docker group:
 
-> synogroup --add docker
+```bash
+synogroup --add docker <user_name>
+```
 
 Change ownership of docker socket to the docker group:
 
-> chown root:docker /var/run/docker.sock
+```bash
+chown root:docker /var/run/docker.sock
+```
 

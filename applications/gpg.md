@@ -215,7 +215,7 @@ Compression: Uncompressed, ZIP, ZLIB, BZIP2
 {% endtab %}
 
 {% tab title="Linux" %}
-```bash
+```
 $ gpg --version
 gpg (GnuPG) 2.2.20
 libgcrypt 1.8.6
