@@ -197,3 +197,39 @@ if $programname == 'pppd' then /var/log/l2tp.log
 
 > service ipsec restart service xl2tpd restart
 
+## Ncdu 磁碟分析器
+
+```bash
+sudo apt-get update
+sudo apt-get install -y ncdu
+
+ncdu /
+```
+
+Command tips
+
+```bash
+? – 顯示幫助介面
+
+up, down j, k – 上下移動光標
+
+right, enter, l – 打開所選目錄
+
+left, <, h – 返回上層目錄
+
+n – 按照文件名排序（再按一下倒序排列）
+
+s – 按照文件大小排序（再按一下倒序排列）
+
+C – 按照項目數排序（再按一下倒序排列）
+
+a – 切換磁碟用量顯示
+
+d – 刪除所選的文件或目錄
+
+i – 顯示所選項的更多信息
+
+r – 刷新/重新計算當前目錄
+
+b – 在當前目錄下打開 shell
+```
