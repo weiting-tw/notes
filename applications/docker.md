@@ -172,7 +172,7 @@ docker安裝後預設沒有daemon.json這個配置檔案，需要進行手動建
 ## 複製容器內資料
 
 ```bash
-docker cp <containId>:<path> <toPath>
+docker cp <containerId>:<path> <toPath>
 ```
 
 ## 載入 volume
@@ -181,3 +181,9 @@ docker cp <containId>:<path> <toPath>
 docker run -it --rm -v <volumeId>:/data node bash
 ```
 
+## 使用 root 身分
+
+```bash
+docker exec -it --user root <containerId> /bin/bash
+docker exec -it -u 0 <containerId> /bin/bash
+```
