@@ -187,3 +187,43 @@ docker run -it --rm -v <volumeId>:/data node bash
 docker exec -it --user root <containerId> /bin/bash
 docker exec -it -u 0 <containerId> /bin/bash
 ```
+
+## [如何由容器連線至宿主](https://docs.docker.com/docker-for-mac/networking/#use-cases-and-workarounds)
+
+{% tabs %}
+{% tab title="Docker Deskop for Windows/Mac 桌面開發環境" %}
+
+`host.docker.internal` - 宿主
+
+`gateway.docker.internal` - 網路閘道
+
+```bash
+# 在宿主執行 HTTP Server
+python3 -m http.server 8000
+
+# 在容器內連回宿主
+$ docker run --rm -it alpine sh
+apk add curl
+curl http://host.docker.internal:8000
+exit
+```
+
+{% endtab %}
+
+{% tab title="Docker for Linux 伺服器原生環境" %}
+
+可以透過名為 `docker0` 的[預設橋接器](https://docs.docker.com/network/bridge/)網路介面自容器內存取宿主
+
+或是使用 `172.17.0.1`
+
+```bash
+# Ubuntu 需要安裝 iproute2 套件以使用 ip 指令
+apt install iproute2
+
+# 在容器內取得宿主橋接器網路位址,通常會 172.17.0.1
+HOST_IP=$(ip route show | awk '/default/ {print $3}')
+ping $HOST_IP
+```
+
+{% endtab %}
+{% endtabs %}
