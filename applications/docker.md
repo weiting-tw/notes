@@ -227,3 +227,33 @@ ping $HOST_IP
 
 {% endtab %}
 {% endtabs %}
+
+## Docker-compose
+
+### [Environment variables in Compose](https://docs.docker.com/compose/environment-variables/)
+
+預設會抓 `docker-compose.yml` 根目錄下的 `.env`
+
+也可以使用 `.env.dev`, `.env.prod` 等等檔案，然後使用 `--env-file .env.dev` 來選取
+
+```bash
+$ cat .env
+TAG=v1.5
+
+$ cat docker-compose.yml
+version: '3'
+services:
+  web:
+    image: "webapp:${TAG}"
+```
+
+可以使用 `docker-compose config` 來輸出結果
+
+```bash
+$ docker-compose config
+
+version: '3'
+services:
+  web:
+    image: 'webapp:v1.5'
+```
