@@ -19,6 +19,7 @@
   * [IIS](applications/iis.md)
   * [Ngrok](applications/ngrok.md)
   * [Npm](applications/npm.md)
+  * [PowerShell](applications/powershell.md)
   * [Redis](applications/redis.md)
   * [SSH](applications/ssh.md)
   * [Synology](applications/synology.md)

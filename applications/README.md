@@ -18,8 +18,8 @@
 * [IIS](iis.md)
 * [Ngrok](ngrok.md)
 * [Npm](npm.md)
+* [PowerShell](powershell.md)
 * [Redis](redis.md)
 * [SSH](ssh.md)
 * [Synology](synology.md)
 * [Web](withweb.md)
-
