@@ -35,6 +35,7 @@
   * [Mac OS](os/macos.md)
   * [Windows 10](os/win10.md)
   * [Raspberry Pi](os/raspberrypi.md)
+  * [Ubuntu](os/ubuntu.md)
 * [其他](others/README.md)
   * [SSL](others/ssl.md)
 
