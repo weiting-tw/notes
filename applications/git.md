@@ -99,7 +99,7 @@ e12d8ef (origin/master, origin/HEAD, cat) HEAD@{2}: checkout: moving from master
 
 ## 對底下的所有資料夾執行 git 指令
 
-使用 npm 的套件 [gitfox](https://github.com/a26007565/notes/tree/c5e66e7fa322b1ea366d2a041ba68edbde4fa419/applications/!https:/github.com/aibeb/gitfox/README.md)
+使用 npm 的套件 [gitfox](https:/github.com/aibeb/gitfox)
 
 使用方法
 
