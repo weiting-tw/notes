@@ -248,3 +248,10 @@ source /usr/local/etc/bash_completion.d/az
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 complete -o nospace -C /usr/local/bin/mc mc
 ```
+
+## 移除檔案
+
+```bash
+find . -iname "obj" | xargs rm -rf
+find . -iname "bin" | xargs rm -rf
+```
