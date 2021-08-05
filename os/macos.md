@@ -148,6 +148,10 @@ rm "/Users/$(whoami)/Library/Application Support/Beyond Compare/registry.dat"
 ## zshrc
 
 ```bash
+if [ -f ~/.bash_profile ]; then
+  source ~/.bash_profile
+fi
+
 ## alias
 alias cls=clear
 alias ping='prettyping --nolegend'
@@ -155,16 +159,30 @@ alias help='tldr'
 alias top="sudo htop"
 ### Beyond Compare
 alias bc=bcomp
-
-### update brew
-up() {
-  brew update
+## HOMEBREW
+[[ $PATH != */usr/local/sbin* ]] && export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+[[ -e "/usr/local/opt/curl/bin" ]] && export PATH="/usr/local/opt/curl/bin:$PATH"
+function up() {
+  brew update && brew doctor
   brew upgrade
+  brew upgrade --cask
+  brew outdated --cask --greedy --verbose | grep -v latest | awk '{print $1}' | xargs -I{} brew upgrade --cask --greedy {}
   brew cleanup
-  brew cask upgrade
-  rm -rf "$(brew --cache)"
+  hash npm 2>/dev/null && npm up -g
+  hash mas 2>/dev/null && mas upgrade
 }
+
+## brew
+alias bs='brew search'
+alias bi='brew install'
+
 ## functions
+
+## GSS Wifi Login
+655wifiLogin() {
+  autowifilogin -u $username -p $password
+  pveAutoConnectVM -h pve.gss.com.tw -u $username -p $password
+}
 
 ### kill process with particular port
 #### port: $1
@@ -176,13 +194,12 @@ killport() {
   fi
 }
 
-## change git author name
 gitNameChange2Weiting() {
   git filter-branch --env-filter '
   OLD_EMAIL="wilber_chen@gss.com.tw"
   CORRECT_NAME="weiting"
   CORRECT_EMAIL="a26007565@gmail.com"
-
+  
   if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]
   then
   export GIT_COMMITTER_NAME="$CORRECT_NAME"
@@ -194,6 +211,40 @@ gitNameChange2Weiting() {
   export GIT_AUTHOR_EMAIL="$CORRECT_EMAIL"
   fi
   ' --tag-name-filter cat -- --branches --tags
-}
-```
+} 
 
+updateSSL() {
+  sudo certbot renew --force-renewal --quiet
+  sudo cp -r /etc/letsencrypt/live/weiting.me/ /Users/weiting/CloudStation/SSL/
+}
+
+## env
+export HOMEBREW_GITHUB_API_TOKEN=$HOMEBREW_GITHUB_API_TOKEN
+export PATH="/usr/local/opt/node@8/bin:$PATH"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+export GPG_TTY=$(tty)
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+fpath=(/usr/local/share/zsh-completions $fpath)
+
+source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# source ~/.antigenrc
+
+
+alias download='axel -n 2'
+
+alias preview="fzf --preview 'bat --style=numbers --color=\"always\" {}'"
+export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null'"
+
+# azure-cli
+autoload -U +X bashcompinit && bashcompinit
+source /usr/local/etc/bash_completion.d/az
+
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+complete -o nospace -C /usr/local/bin/mc mc
+```
