@@ -60,6 +60,230 @@ If you get an error of the type Error: Cask 'hex-fiend-beta' definition is inval
 /usr/bin/find "$(brew --prefix)/Caskroom/"*'/.metadata' -type f -name '*.rb' -print0 | /usr/bin/xargs -0 /usr/bin/perl -i -pe 's/depends_on macos: \[.*?\]//gsm;s/depends_on macos: .*//g'
 ```
 
+### Backup Homebrew Setup
+
+```bash
+brew bundle dump --describe --force --file=${path}
+```
+
+wil create `Brewfile`
+
+``` Brewfile
+tap "a26007565/iota"
+tap "adoptopenjdk/openjdk"
+tap "azure/functions"
+tap "buo/cask-upgrade"
+tap "heroku/brew"
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/cask-fonts"
+tap "homebrew/cask-versions"
+tap "homebrew/core"
+tap "homebrew/services"
+tap "mongodb/brew"
+tap "ringohub/redis-cli"
+# Plugin manager for zsh, inspired by oh-my-zsh and vundle
+brew "antigen"
+# Light UNIX download accelerator
+brew "axel"
+# Microsoft Azure CLI 2.0
+brew "azure-cli"
+# Clone of cat(1) with syntax highlighting and Git integration
+brew "bat"
+# Tool to obtain certs from Let's Encrypt and autoenable HTTPS
+brew "certbot", link: false
+# Cross-platform make
+brew "cmake"
+# Top-like interface for container metrics
+brew "ctop"
+# Good-lookin' diffs with diff-highlight and more
+brew "diff-so-fancy"
+# Secure communications between a client and a DNS resolver
+brew "dnscrypt-proxy"
+# Play, record, convert, and stream audio and video
+brew "ffmpeg"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# GNU compiler collection
+brew "gcc"
+# Distributed revision control system
+brew "git"
+# Git extension for versioning large files
+brew "git-lfs"
+# Official GitLab CI runner
+brew "gitlab-runner"
+# GNU Pretty Good Privacy (PGP) package
+brew "gnupg", link: false
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
+# Command-Line Interface for Hasura GraphQL Engine
+brew "hasura-cli"
+# Convert source code to formatted text with syntax highlighting
+brew "highlight"
+# Improved top (interactive process viewer)
+brew "htop"
+# Tools and libraries to manipulate images in many formats
+brew "imagemagick"
+# Development kit for the Java programming language
+brew "openjdk"
+# Dex to Java decompiler
+brew "jadx"
+# Load testing and performance measurement application
+brew "jmeter"
+# Lightweight and flexible command-line JSON processor
+brew "jq"
+# Version of the SSL/TLS protocol forked from OpenSSL
+brew "libressl"
+# Mac App Store command-line interface
+brew "mas"
+# Utility for testing the memory subsystem
+brew "memtester"
+# Replacement for ls, cp and other commands for object storage
+brew "minio-mc"
+# Cross platform, open source .NET development framework
+brew "mono"
+# Utility for managing network connections
+brew "netcat"
+# Port scanning utility for large networks
+brew "nmap"
+# Simplified-traditional Chinese conversion tool
+brew "opencc"
+# 7-Zip (high compression file archiver) implementation
+brew "p7zip"
+# Provides an easy way to use U2F-compliant authenticators with PAM
+brew "pam-u2f"
+# Swiss-army knife of markup format conversion
+brew "pandoc"
+# Pinentry for GPG on Mac
+brew "pinentry-mac"
+# Wrapper to colorize and simplify ping's output
+brew "prettyping"
+# Python version management
+brew "pyenv"
+# SMART hard drive monitoring
+brew "smartmontools"
+# Version control system designed to be a better CVS
+brew "subversion"
+# TCP connect to the given IP/port combo
+brew "tcping"
+# Microsoft Team Explorer Everywhere command-line Client
+brew "tee-clc"
+# User interface to the TELNET protocol
+brew "telnet"
+# Text interface for Git repositories
+brew "tig"
+# Graphical side by side diff utility
+brew "tkdiff"
+# Simplified and community-driven man pages
+brew "tldr"
+# Terminal multiplexer
+brew "tmux"
+# Display directories as trees (with optional color/HTML output)
+brew "tree"
+# Watch files and take action when they change
+brew "watchman"
+# Internet file retriever
+brew "wget"
+# Fish-like fast/unobtrusive autosuggestions for zsh
+brew "zsh-autosuggestions"
+# Additional completion definitions for zsh
+brew "zsh-completions"
+# Zsh port of Fish shell's history search
+brew "zsh-history-substring-search"
+# Fish shell like syntax highlighting for zsh
+brew "zsh-syntax-highlighting"
+# Azure Functions Core Tools 3.0
+brew "azure/functions/azure-functions-core-tools@3"
+# Everything you need to get started with Heroku
+brew "heroku/brew/heroku"
+# An interactive JavaScript command-line interface to MongoDB
+brew "mongodb/brew/mongodb-community-shell"
+# Install the redis-cli only.
+brew "ringohub/redis-cli/redis-cli"
+# Android SDK component
+cask "android-platform-tools"
+# Allows connection to a computer remotely
+cask "anydesk"
+# Data management tool that enables working with SQL Server
+cask "azure-data-studio"
+# Tool to flash OS images to SD cards & USB drives
+cask "balenaetcher"
+# Menu bar icon organizer
+cask "bartender"
+# Cross platform SQL editor and database management app
+cask "beekeeper-studio"
+# Compare files and folders
+cask "beyond-compare"
+# Desktop password and login vault
+cask "bitwarden"
+# Web debugging Proxy application
+cask "charles"
+# Collaboration tool with multi-user screen sharing
+cask "coscreen"
+# Browser for SQLite databases
+cask "db-browser-for-sqlite"
+# App to build and share containerized applications and microservices
+cask "docker"
+# Developer platform
+cask "dotnet-sdk"
+# QuickLook generator and Spotlight importer
+cask "epubquicklook"
+cask "font-noto-sans-cjk-tc"
+cask "font-source-code-pro"
+# GIT client
+cask "fork"
+# Fabric agent with endpoint protection and cloud sandbox
+cask "forticlient"
+# Git client focusing on productivity
+cask "gitkraken"
+cask "iota"
+cask "java"
+cask "jxplorer"
+# Password manager app
+cask "keepassxc"
+# Visual user interface for Docker Container management
+cask "kitematic"
+# Explorer for Azure Storage
+cask "microsoft-azure-storage-explorer"
+# Reverse proxy, secure introspectable tunnels to localhost
+cask "ngrok"
+# Command-line shell and scripting language
+cask "powershell"
+# QuickLook generator for Markdown files
+cask "qlmarkdown"
+cask "qlstephen"
+# Centralizes all remote connections on a single platform
+cask "remote-desktop-manager-free"
+# Remote access and connectivity software focused on security
+cask "teamviewer"
+# Git client focusing on power and productivity
+cask "tower"
+# Open-source code editor
+cask "visual-studio-code"
+cask "wkhtmltopdf"
+mas "Disk Speed Test", id: 425264550
+mas "Fantastical", id: 975937182
+mas "iSuper DVD Ripper", id: 625150797
+mas "Keynote", id: 409183694
+mas "KKBOX", id: 1105332179
+mas "LINE", id: 539883307
+mas "Microsoft Remote Desktop", id: 1295203466
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "PNG Compressor", id: 434886325
+mas "Slack", id: 803453959
+mas "Telegram", id: 747648890
+mas "Yoink", id: 457622435
+```
+
+### Restore
+
+In Brewfile path
+
+```bash
+brew bundle
+```
+
 ## 修復 Dock 上的 icon 遺失
 
 * 先從 Applications 內，將該app拖移到 Dock
