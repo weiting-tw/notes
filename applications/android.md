@@ -4,13 +4,13 @@
 
 ```bash
 # 啟用
-$ ime enabled com.google.android.apps.inputmethod.zhuyin/.ZhuyinInputMethodService
+ime enable com.google.android.apps.inputmethod.zhuyin/.ZhuyinInputMethodService
 
-＃
-$ ime enabled com.google.android.apps.inputmethod.zhuyin/.ZhuyinInputMethodService
+# 停用
+ime diable com.google.android.apps.inputmethod.zhuyin/.ZhuyinInputMethodService
 
 # 設定
-ime enabled com.google.android.apps.inputmethod.zhuyin/.ZhuyinInputMethodService
+ime set com.google.android.apps.inputmethod.zhuyin/.ZhuyinInputMethodService
 ```
 
 ## 給予/拒絕權限
@@ -26,4 +26,3 @@ adb shell pm revoke com.name.app android.permission.READ_PROFILE
 ```bash
 adb shell am start -a android.settings.LOCALE_SETTINGS
 ```
-
