@@ -21,3 +21,64 @@
 netsh interface portproxy delete v4tov4 listenport=80 listenaddress=*
 ```
 
+## [WSL](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#wsl-2-settings)
+
+### 使用 wslconfig 設定全域選項
+
+適用于 Windows 組建19041和更新版本
+
+將 `.wslconfig` 放到 [使用者] 資料夾的根目錄中，以設定全域 WSL ex： C:\Users\<yourUserName>\.wslconfig
+
+* 須重開才會套用 `wsl --shutdown`
+
+#### wslconfig 範例
+
+```config
+[wsl2]
+kernel=C:\\temp\\myCustomKernel
+memory=4GB # Limits VM memory in WSL 2 to 4 GB
+processors=2 # Makes the WSL 2 VM use two virtual processors
+```
+
+key | value | default | notes
+------- | ------- | ------- | -------
+kernel | string | The Microsoft built kernel provided inbox | An absolute Windows path to a custom Linux kernel.
+memory | size | 50% of total memory on Windows or 8GB, whichever is less; on builds before 20175: 80% of your total memory on Windows | How much memory to assign to the WSL 2 VM.
+processors | number | The same number of processors on Windows | How many processors to assign to the WSL 2 VM.
+localhostForwarding | boolean | true | Boolean specifying if ports bound to wildcard or localhost in the WSL 2 VM should be connectable from the host via localhost:port.
+kernelCommandLine | string | Blank | Additional kernel command line arguments.
+swap | size | 25% of memory size on Windows rounded up to the nearest GB | How much swap space to add to the WSL 2 VM, 0 for no swap file.
+swapFile | string | %USERPROFILE%\AppData\Local\Temp\swap.vhdx | An absolute Windows path to the swap virtual hard disk.
+
+Entries with the path value must be Windows paths with escaped backslashes, e.g: C:\\Temp\\myCustomKernel
+
+Entries with the size value must be a size followed by a unit, for example 8GB or 512MB.
+
+### 移動 docker image 所佔用空間
+
+預設位置: `%LOCALAPPDATA%/Docker/wsl`
+
+默認情況下，Docker Desktop for Window會創建如下兩個發行版（distro）：
+
+> data/ext4.vhdx 是被 docker-desktop-data 使用
+> distro/ext4.vhdx 是被 docker-desktop 使用
+
+```bash
+# 關閉 wsl
+wsl --shutdown
+
+# 列出所有資源
+D:\work>wsl --list --verbose
+NAME                   STATE           VERSION
+docker-desktop         Stopped         2
+docker-desktop-data    Stopped         2
+
+# 備份出來
+wsl --export docker-desktop-data E:\docker-desktop\docker-desktop-data.tar
+
+# 移除當前 docker-desktop-data
+wsl --unregister docker-desktop-data
+
+# 重新匯入，記得把備份出的移除
+wsl --import docker-desktop-data E:\docker-desktop\data E:\docker-desktop\docker-desktop-data.tar --version 2
+```
