@@ -82,3 +82,35 @@ wsl --unregister docker-desktop-data
 # 重新匯入，記得把備份出的移除
 wsl --import docker-desktop-data E:\docker-desktop\data E:\docker-desktop\docker-desktop-data.tar --version 2
 ```
+
+## IPsec/L2TP
+
+### 無法連線時解決方式
+
+#### Windows 錯誤 809
+
+> 錯誤 809：無法建立計算機與 VPN 服務器之間的網路連接，因為遠程服務器無回應。這可能是因為未將計算機與遠程服務器之間的某種網路設備(如防火牆、NAT、路由器等)配置為允許 VPN 連接。請與管理員或服務提供商聯系以確定哪種設備可能產生此問題。
+
+**註：** 僅當你使用 IPsec/L2TP 模式連接到 VPN 時，才需要進行的註冊表更改。對於 `IKEv2` 和 `IPsec/XAuth` 模式，無需進行此更改。
+
+要解決此錯誤，在首次連接之前需要[修改一次註冊表](https://documentation.meraki.com/MX-Z/Client_VPN/Troubleshooting_Client_VPN#Windows_Error_809)，以解決 VPN 服務器 和/或 客戶端與 NAT （比如路由器）的相容問題。請下載並導入下麵的 `.reg` 文件，或者打開 [系統管理員](http://www.cnblogs.com/xxcanghai/p/4610054.html) 並運行以下命令。**完成後必須重啟。**
+
+* 適用於 Windows Vista, 7, 8.x 和 10 ([下載 .reg 文件](https://dl.ls20.com/reg-files/v1/Fix_VPN_Error_809_Windows_Vista_7_8_10_Reboot_Required.reg))
+
+  ```console
+  REG ADD HKLM\SYSTEM\CurrentControlSet\Services\PolicyAgent /v AssumeUDPEncapsulationContextOnSendRule /t REG_DWORD /d 0x2 /f
+  ```
+
+* 僅適用於 Windows XP ([下載 .reg 文件](https://dl.ls20.com/reg-files/v1/Fix_VPN_Error_809_Windows_XP_ONLY_Reboot_Required.reg))
+
+  ```console
+  REG ADD HKLM\SYSTEM\CurrentControlSet\Services\IPSec /v AssumeUDPEncapsulationContextOnSendRule /t REG_DWORD /d 0x2 /f
+  ```
+
+另外，某些個別的 Windows 系統禁用了 IPsec 加密，也會導致連接失敗。要重新啟用它，可以運行以下命令並重啟。
+
+* 適用於 Windows XP, Vista, 7, 8.x 和 10 ([下載 .reg 文件](https://dl.ls20.com/reg-files/v1/Fix_VPN_Error_809_Allow_IPsec_Reboot_Required.reg))
+
+  ```console
+  REG ADD HKLM\SYSTEM\CurrentControlSet\Services\RasMan\Parameters /v ProhibitIpSec /t REG_DWORD /d 0x0 /f
+  ```
