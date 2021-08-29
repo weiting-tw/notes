@@ -257,3 +257,10 @@ services:
   web:
     image: 'webapp:v1.5'
 ```
+
+## docker-compose up 啟動容器超時錯誤：ERROR: An HTTP request took too long to complete. Retry with --verbose to obtain debug information.
+
+```bash
+export COMPOSE_HTTP_TIMEOUT=500
+export DOCKER_CLIENT_TIMEOUT=500
+```
