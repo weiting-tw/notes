@@ -166,3 +166,8 @@ sudo swapoff /swapfile
 # 刪除
 sudo rm /swapfile
 ```
+
+## 查詢目前正在使用的PORT 號
+
+> sudo lsof -i -n -P|grep LISTEN
+> sudo netstat -lpn |grep {port}
