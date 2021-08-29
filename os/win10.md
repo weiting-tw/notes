@@ -114,3 +114,7 @@ wsl --import docker-desktop-data E:\docker-desktop\data E:\docker-desktop\docker
   ```console
   REG ADD HKLM\SYSTEM\CurrentControlSet\Services\RasMan\Parameters /v ProhibitIpSec /t REG_DWORD /d 0x0 /f
   ```
+
+## 刪除超過30天的檔案
+
+> ForFiles /p "C:\path\to\folder" /s /d -30 /c "cmd /c del /q @file"
