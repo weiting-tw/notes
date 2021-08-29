@@ -171,3 +171,31 @@ sudo rm /swapfile
 
 > sudo lsof -i -n -P|grep LISTEN
 > sudo netstat -lpn |grep {port}
+
+## 硬碟效能
+
+`hdparm` is a good place to start.
+
+```bash
+sudo hdparm -Tt /dev/sda
+
+/dev/sda:
+Timing cached reads:   12540 MB in  2.00 seconds = 6277.67 MB/sec
+Timing buffered disk reads: 234 MB in  3.00 seconds =  77.98 MB/sec
+```
+
+`sudo hdparm -v /dev/sda` will give information as well.
+
+dd will give you information on write speed.
+
+If the drive doesn't have a file system (and only then), use of=`/dev/sda`.
+
+Otherwise, mount it on /tmp and write then delete the test output file.
+
+```bash
+dd if=/dev/zero of=/tmp/output bs=8k count=10k; rm -f /tmp/output
+
+10240+0 records in
+10240+0 records out
+83886080 bytes (84 MB) copied, 1.08009 s, 77.7 MB/s
+```
