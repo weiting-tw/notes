@@ -22,4 +22,5 @@
 * [Redis](redis.md)
 * [SSH](ssh.md)
 * [Synology](synology.md)
+* [VS Code](vscode.md)
 * [Web](withweb.md)

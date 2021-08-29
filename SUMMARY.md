@@ -23,6 +23,7 @@
   * [Redis](applications/redis.md)
   * [SSH](applications/ssh.md)
   * [Synology](applications/synology.md)
+  * [VS Code](applications/vscode.md)
   * [Web](applications/withweb.md)
 * [程式語言](cheng-shi-yu-yan/README.md)
   * [C\#](cheng-shi-yu-yan/csharp/README.md)
