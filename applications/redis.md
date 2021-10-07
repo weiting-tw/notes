@@ -245,5 +245,7 @@ SCAN 0 COUNT 1000 MATCH *
 
 # Delete
 DEL key1 key2 key3...
-```
 
+# 取得 hash 中，所有的值
+HGETALL Key
+```
