@@ -199,3 +199,45 @@ dd if=/dev/zero of=/tmp/output bs=8k count=10k; rm -f /tmp/output
 10240+0 records out
 83886080 bytes (84 MB) copied, 1.08009 s, 77.7 MB/s
 ```
+
+## 更新 hostname
+
+```bash
+hostnamectl [OPTIONS...] COMMAND ...
+
+Query or change system hostname.
+
+  -h --help              Show this help
+     --version           Show package version
+     --no-ask-password   Do not prompt for password
+  -H --host=[USER@]HOST  Operate on remote host
+  -M --machine=CONTAINER Operate on local container
+     --transient         Only set transient hostname
+     --static            Only set static hostname
+     --pretty            Only set pretty hostname
+
+Commands:
+  status                 Show current hostname settings
+  set-hostname NAME      Set system hostname
+  set-icon-name NAME     Set icon name for host
+  set-chassis NAME       Set chassis type for host
+  set-deployment NAME    Set deployment environment for host
+  set-location NAME      Set location for host
+```
+
+把主機名稱修改成 ubuntu-vm-x64：
+> sudo hostnamectl set-hostname ubuntu-vm-x64
+
+說用 `hostnamectl status` 檢查有沒有修改成功：
+
+```bash
+   Static hostname: ubuntu-vm-x64
+         Icon name: computer-vm
+           Chassis: vm
+        Machine ID: 0f5a04db6f2347ee961e520a9bf233bb
+           Boot ID: 41691ad2b02044b88c3895f4a40ec3a5
+    Virtualization: kvm
+  Operating System: Ubuntu 20.04.3 LTS
+            Kernel: Linux 5.4.0-89-generic
+      Architecture: x86-64
+```
