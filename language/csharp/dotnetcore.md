@@ -218,3 +218,89 @@ Write-Host ""
 ```powershell
 iex ((New-Object System.Net.WebClient).DownloadString('https://gist.githubusercontent.com/nerzhulart/89c6a376b521a6e7eb69a04277a9489a/raw/Windows%2520Defender%2520Exclusions%2520for%2520Developer.ps1'))
 ```
+
+## 使用 HttpClient 發送 multipart/form-data
+
+出現參數錯誤問題
+
+Postman
+
+```body
+Content-Type: multipart/form-data; boundary=--------------------------639275760242036520206377
+Accept-Encoding: gzip, deflate
+Content-Length: 566
+Connection: keep-alive
+
+----------------------------639275760242036520206377
+Content-Disposition: form-data; name="mch_id"
+
+1565111111
+----------------------------639275760242036520206377
+Content-Disposition: form-data; name="media_hash"
+
+7215E92A8F3F3D0256484EFFF53A25F6
+----------------------------639275760242036520206377
+Content-Disposition: form-data; name="sign_type"
+
+HMAC-SHA256
+----------------------------639275760242036520206377
+Content-Disposition: form-data; name="sign"
+
+A1D8B094FA24BE5531D1AC198DE25550
+----------------------------639275760242036520206377--
+```
+
+c#
+
+```body
+Content-Type: multipart/form-data; boundary="e9d5712f-7923-4ec5-8bf3-c8d5d3cd3217"
+Content-Length: 502
+
+--e9d5712f-7923-4ec5-8bf3-c8d5d3cd3217
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: form-data; name=mch_id
+
+
+--e9d5712f-7923-4ec5-8bf3-c8d5d3cd3217
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: form-data; name=media_hash
+
+33F15BC2D17D6FFBC18FA566EF65722E
+--e9d5712f-7923-4ec5-8bf3-c8d5d3cd3217
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: form-data; name=sign
+
+1E377684F9BD583D2ED26FB367916C0C
+--e9d5712f-7923-4ec5-8bf3-c8d5d3cd3217--
+```
+
+因 `"` 而造成發送失敗，[參考](https://developers.de/blogs/damir_dobric/archive/2013/09/10/problems-with-webapi-multipart-content-upload-and-boundary-quot-quotes.aspx)
+
+```txt
+RFC 2612 原文：
+
+Although RFC 2046 [40] permits the boundary string to be
+quoted, some existing implementations handle a quoted boundary
+string incorrectly.
+```
+
+* Boundary 的雙引號
+
+    ```csharp
+    // 兩個問題都是由於雙引號導致的，所以只需要在真正發起調用之前將內部的雙引號替換為空，或者將缺失的雙引號添加上即可。
+    var boundaryValue = form.Headers.ContentType.Parameters.Single(p => p.Name == "boundary");
+    boundaryValue.Value = boundaryValue.Value.Replace("\"", String.Empty);
+    ```
+
+* 表單內鍵值對，值的雙引號
+
+    ```csharp
+    // 在構造內部Content 的時候，其Name 手動賦予雙引號。
+    var form = new MultipartFormDataContent
+    {
+        {new StringContent(mchId), "\"mch_id\""},
+        {new ByteArrayContent(bytes), "media", $"\"{HttpUtility.UrlEncode(Path.GetFileName(imagePath))}\""},
+        {new StringContent(mediaHash), "\"media_hash\""},
+        {new StringContent(sign), "sign"}
+    };
+    ```

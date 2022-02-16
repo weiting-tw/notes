@@ -1,4 +1,4 @@
-# Languages
+# 程式語言
 
 * [C#](csharp/README.md)
 * [JavaScript](js.md)
