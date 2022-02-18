@@ -16,6 +16,7 @@
 * [GPG](gpg.md)
 * [Home Assistant](homeassistant.md)
 * [IIS](iis.md)
+* [Line Bot](LineBot.md)
 * [Ngrok](ngrok.md)
 * [Npm](npm.md)
 * [PowerShell](powershell.md)

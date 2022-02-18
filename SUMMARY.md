@@ -17,6 +17,7 @@
   * [GPG](applications/gpg.md)
   * [Home Assistant](applications/homeassistant.md)
   * [IIS](applications/iis.md)
+  * [Line Bot](applications/LineBot.md)
   * [Ngrok](applications/ngrok.md)
   * [Npm](applications/npm.md)
   * [PowerShell](applications/powershell.md)
