@@ -248,4 +248,10 @@ DEL key1 key2 key3...
 
 # 取得 hash 中，所有的值
 HGETALL Key
+
+# 批次刪除特定資料
+# powershell
+redis-cli del @(redis-cli --scan --pattern "prefix:*") 
+# linux
+redis-cli --scan --pattern prefix:* | xargs -L redis-cli -c del
 ```
