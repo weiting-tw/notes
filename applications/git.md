@@ -230,9 +230,30 @@ git config --global alias.ignore '!'"gi() { curl -sL https://www.gitignore.io/ap
 
   > git ignore visualstudio,aspnetcore &gt; .gitignore
 
-### 快速調整 Git 設定的小工具
+## 快速調整 Git 設定的小工具
 
 [@willh/git-setup](https://www.npmjs.com/package/@willh/git-setup) 會全自動設定 Git 版控環境，並且跨平台支援 Windows, Linux, macOS 等作業系統的命令列環境，尤其針對中文環境經常會出現亂碼的問題都會完整的解決。
 
 > npx @willh/git-setup
 
+## 設定 [core.autocrlf](https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration) 解決換行問題
+
+* 各系統設定
+  | Unix (Mac/Linux) | Windows |
+  |---|---|
+  | input | true |
+
+* 各設定值的作用
+  Git can handle this by auto-converting CRLF line endings into LF when you add a file to the index, and vice versa when it checks out code onto your filesystem. You can turn on this functionality with the core.autocrlf setting. If you’re on a Windows machine, set it to true — this converts LF endings into CRLF when you check out code:
+
+  > git config --global core.autocrlf true
+
+  If you’re on a Linux or macOS system that uses LF line endings, then you don’t want Git to automatically convert them when you check out files; however, if a file with CRLF endings accidentally gets introduced, then you may want Git to fix it. You can tell Git to convert CRLF to LF on commit but not the other way around by setting core.autocrlf to input:
+
+  > git config --global core.autocrlf input
+  
+  This setup should leave you with CRLF endings in Windows checkouts, but LF endings on macOS and Linux systems and in the repository.
+
+  If you’re a Windows programmer doing a Windows-only project, then you can turn off this functionality, recording the carriage returns in the repository by setting the config value to false:
+
+  > git config --global core.autocrlf false
