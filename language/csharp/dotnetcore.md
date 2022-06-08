@@ -295,7 +295,7 @@ string incorrectly.
 * 表單內鍵值對，值的雙引號
 
     ```csharp
-    // 在構造內部Content 的時候，其Name 手動賦予雙引號。
+    // 在構造內部 Content 的時候，其 Name 手動賦予雙引號。
     var form = new MultipartFormDataContent
     {
         {new StringContent(mchId), "\"mch_id\""},
@@ -304,3 +304,8 @@ string incorrectly.
         {new StringContent(sign), "sign"}
     };
     ```
+
+## [NuGet 已被取代且易受攻擊的相依性](https://docs.microsoft.com/zh-tw/nuget/concepts/security-best-practices#nuget-deprecated-and-vulnerable-dependencies)
+
+> dotnet list package --deprecated
+> dotnet list package --vulnerable
