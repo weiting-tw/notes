@@ -309,3 +309,24 @@ string incorrectly.
 
 > dotnet list package --deprecated
 > dotnet list package --vulnerable
+
+## nuget 套件
+
+### [路徑更換](https://docs.microsoft.com/zh-tw/nuget/consume-packages/managing-the-global-packages-and-cache-folders)
+
+```powershell
+# 檢視資料夾位置
+nuget locals all -list 
+
+# 設定環境變數
+[Environment]::SetEnvironmentVariable('NUGET_PACKAGES', $PATH, 'Machine')
+[Environment]::SetEnvironmentVariable('NUGET_HTTP_CACHE_PATH', $PATH, 'Machine')
+```
+
+### 清除快取
+
+```powershell
+nuget locals all -clear
+dotnet nuget locals all --clear
+```
+
