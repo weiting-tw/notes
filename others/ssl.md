@@ -4,6 +4,7 @@
 
 * [ssl labs](https://www.ssllabs.com/ssltest/)
 * [cloudflare ssl-test](https://www.cloudflare.com/lp/ssl-test/)
+* [testssl](#testssl)
 
 ## LetsEncrypt
 
@@ -59,3 +60,6 @@ certbot/dns-cloudflare  certonly \
 
 > openssl pkcs12 -in cert.pem -inkey privkey.pem -export -out server.pfx
 
+## [testssl](https://github.com/drwetter/testssl.sh)
+
+> docker run -it --rm --init drwetter/testssl.sh url
