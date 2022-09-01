@@ -5,12 +5,12 @@
 * 在 Azure AD 應用程式註冊加入一個服務
 * 取得該 `識別碼` \($username\)
 * 憑證及祕密建立密碼 \($password\)
-* 在要部署的應用程式中 `存取控制權(IAM)` 給予剛建立應用程式 `參與者` 或 `自訂角色`
-* 在CI的加上環境變數
+* 在要部署的應用程式中 `存取控制權 (IAM)` 給予剛建立應用程式 `參與者` 或 `自訂角色`
+* 在 CI 的加上環境變數
   * username \(應用程式識別碼\)
   * password \(應用程式密碼\)
-  * tenant \(租戶ID\)
-  * subscription \(訂閱ID\)
+  * tenant \(租戶 ID\)
+  * subscription \(訂閱 ID\)
   * rg \(資源群組\)
   * serviceName \(應用服務名稱\)
 * [sample](https://gitlab.com/weitingTW/azure-deploy/)
@@ -58,7 +58,7 @@ deployer.json
 <a href="<webappname>.azurewebsites.net/?x-ms-routing-name=staging">staging</a>
 ```
 
-依預設，新的位置會取得的路由規則 0% ，以`灰色顯示`。 當您`明確地將此值設定為 0%` 顯示在`黑色文字`\) \(時，您的使用者可以使用查詢參數手動存取預備位置 `x-ms-routing-name` 。 但是，它們不會自動路由到位置，因為路由百分比設定為0。 這是一種先進的案例，可讓您從公用「隱藏」預備位置，同時讓內部團隊可以測試位置的變更。
+依預設，新的位置會取得的路由規則 0% ，以`灰色顯示`。當您`明確地將此值設定為 0%` 顯示在`黑色文字`\) \(時，您的使用者可以使用查詢參數手動存取預備位置 `x-ms-routing-name` 。但是，它們不會自動路由到位置，因為路由百分比設定為 0。這是一種先進的案例，可讓您從公用「隱藏」預備位置，同時讓內部團隊可以測試位置的變更。
 
 #### 其他指令
 
@@ -86,3 +86,12 @@ deployer.json
 
 可指派範圍可以設定在訂閱或資源群組上
 
+
+
+## 使用 Docker 時，無法連線到站台時
+
+預設會使用容器的 `80` 或 `8080` 的 port
+
+當 port 不是上述時，可以透過在 APPLICATION SETTINGS 設定環境變數 `WEBSITES_PORT` 來解決
+
+<https://docs.microsoft.com/zh-tw/azure/app-service/configure-custom-container?pivots=container-linux#configure-port-number>
