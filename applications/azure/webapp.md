@@ -95,3 +95,36 @@ deployer.json
 當 port 不是上述時，可以透過在 APPLICATION SETTINGS 設定環境變數 `WEBSITES_PORT` 來解決
 
 <https://docs.microsoft.com/zh-tw/azure/app-service/configure-custom-container?pivots=container-linux#configure-port-number>
+
+## WebP 出現 404 的問題
+
+```web.config
+<configuration>
+    <system.webServer>
+        <staticContent>
+            <mimeMap fileExtension="webp" mimeType="image/webp" />
+        </staticContent>
+    </system.webServer>
+</configuration>
+```
+
+## React Route 問題
+
+```web.config
+<configuration>
+    <system.webServer>
+        <rewrite>
+            <rules>
+                <rule name="React Routes" stopProcessing="true">
+                    <match url=".*" />
+                    <conditions logicalGrouping="MatchAll">
+                        <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
+                        <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
+                    </conditions>
+                    <action type="Rewrite" url="/index.html" />
+                </rule>
+            </rules>
+        </rewrite>
+    </system.webServer>
+</configuration>
+```
