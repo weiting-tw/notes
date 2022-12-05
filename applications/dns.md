@@ -20,3 +20,6 @@ dscacheutil -flushcache
 /etc/init.d/nscd restart
 ```
 
+## [MxToolbox](https://mxtoolbox.com/SuperTool.aspx)
+
+All of your MX record, DNS, blacklist and SMTP diagnostics in one integrated tool.  Input a domain name or IP Address or Host Name. Links in the results will guide you to other relevant tools and information.  And you'll have a chronological history of your results.
