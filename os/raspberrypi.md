@@ -156,7 +156,7 @@ update settings:
 username    *    "password"    *
 ```
 
-### 設置PSK預共享密鑰
+### 設置 PSK 預共享密鑰
 
 > nano /etc/ipsec.secrets
 
@@ -233,3 +233,13 @@ r – 刷新/重新計算當前目錄
 
 b – 在當前目錄下打開 shell
 ```
+
+## [screenFetch](https://github.com/KittyKatt/screenFetch)
+
+## Install
+
+> sudo apt-get install screenfetch
+
+## Show info when Login
+
+> echo "^sreenfetch" >> ~/.bashrc
