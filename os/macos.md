@@ -2,7 +2,7 @@
 
 ## rm 刪除大量檔案時，出現 Argument list too long
 
-xargs 的命令一次會被調用 2000~ 4000次左右，因此，如果列出的log有一萬筆的話，可能就會被分成 3到 5次左右來執行，因而避開了 Argument list too long 的錯誤。
+xargs 的命令一次會被調用 2000~ 4000 次左右，因此，如果列出的 log 有一萬筆的話，可能就會被分成 3 到 5 次左右來執行，因而避開了 Argument list too long 的錯誤。
 
 ```bash
 find . -name "*.log" | xargs rm
@@ -286,10 +286,10 @@ brew bundle
 
 ## 修復 Dock 上的 icon 遺失
 
-* 先從 Applications 內，將該app拖移到 Dock
+* 先從 Applications 內，將該 app 拖移到 Dock
 * 若不行的話，將電腦進入[安全模式](https://support.apple.com/HT201262)，會清掉 low-level caches
 * 關機 ![image](https://cdn1.tekrevue.com/wp-content/uploads/2018/03/Shut-Down.jpg)
-* 開機時按住shift，直到開機完成 ![image](https://cdn1.tekrevue.com/wp-content/uploads/2018/03/Shift-Key.jpg)
+* 開機時按住 shift，直到開機完成 ![image](https://cdn1.tekrevue.com/wp-content/uploads/2018/03/Shift-Key.jpg)
 * 正常重新開機
 
 ## 完整反安裝 Xcode
@@ -322,7 +322,7 @@ find . -type f -name ".DS_Store" -o -name "._*" -delete
 defaults write com.apple.desktopservices DSDontWriteNetworkStores true
 ```
 
-## [自動加載ssh key](../applications/git.md#adding-your-ssh-key-to-the-ssh-agent)
+## [自動加載 ssh key](../applications/git.md#adding-your-ssh-key-to-the-ssh-agent)
 
 ## [開啟 cron job 的記錄檔](https://apple.stackexchange.com/questions/38861/where-is-the-cron-log-file-in-macosx-lion)
 
@@ -478,4 +478,14 @@ complete -o nospace -C /usr/local/bin/mc mc
 ```bash
 find . -iname "obj" | xargs rm -rf
 find . -iname "bin" | xargs rm -rf
+```
+
+## 設定個別的使用者帳號或群組權限
+
+```bash
+# 給予管理員權限
+sudo dscl . -append /Groups/admin GroupMembership $USER
+
+# 移除管理員權限
+sudo dscl . -delete /Groups/admin GroupMembership $USER
 ```
