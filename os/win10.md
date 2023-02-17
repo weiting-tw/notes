@@ -130,3 +130,8 @@ wsl --import docker-desktop-data E:\docker-desktop\data E:\docker-desktop\docker
 ### 查找禁用範圍
 
 > netsh interface ipv4 show excludedportrange protocol=tcp
+
+## 清除 Windows TCP Port 保留區段
+
+> net stop winnat
+> net start winnat
