@@ -489,3 +489,11 @@ sudo dscl . -append /Groups/admin GroupMembership $USER
 # 移除管理員權限
 sudo dscl . -delete /Groups/admin GroupMembership $USER
 ```
+
+## 使用 sudo 時改用指纹解鎖
+
+```bash
+sudo sed -i ".bak" '2s/^/auth sufficient pam_tid.so\'$'\n/g' /etc/pam.d/sudo
+```
+
+或可使用 [sudo-touchid](https://github.com/artginzburg/sudo-touchid)
