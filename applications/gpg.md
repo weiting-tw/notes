@@ -17,37 +17,37 @@ Download Link: [Gnupg](https://www.gnupg.org/download/index.html>)
 ```text
 > gpg --full-generate-key
 
-請選擇你要使用的金鑰種類:
+請選擇你要使用的金鑰種類：
    (1) RSA 和 RSA (預設)
    (2) DSA 和 Elgamal
    (3) DSA (僅能用於簽署)
    (4) RSA (僅能用於簽署)
-你要選哪一個? 1
+你要選哪一個？1
 
 # 建議 4096 位元
-RSA 金鑰的長度可能介於 1024 位元和 4096 位元之間.
-你想要用多大的金鑰尺寸? (2048) 4096
+RSA 金鑰的長度可能介於 1024 位元和 4096 位元之間。
+你想要用多大的金鑰尺寸？(2048) 4096
 你所要求的金鑰尺寸是 4096 位元
 
-請指定這把金鑰的有效期限是多久.
+請指定這把金鑰的有效期限是多久。
          0 = 金鑰不會過期
       <n>  = 金鑰在 n 天後會到期
       <n>w = 金鑰在 n 週後會到期
       <n>m = 金鑰在 n 月後會到期
       <n>y = 金鑰在 n 年後會到期
-金鑰的有效期限是多久? (0) 0
+金鑰的有效期限是多久？(0) 0
 金鑰完全不會過期
 
 # 確認
-GnuPG 需要建構使用者 ID 以識別你的金鑰.
+GnuPG 需要建構使用者 ID 以識別你的金鑰。
 
-真實姓名: <Name>
-電子郵件地址: <Email>
-註釋:
+真實姓名：<Name>
+電子郵件地址：<Email>
+註釋：
 你選擇了這個使用者 ID:
     "<Name> <<Email>>"
 
-變更姓名(N), 註釋(C), 電子郵件地址(E)或確定(O)/退出(Q)? O
+變更姓名 (N), 註釋 (C), 電子郵件地址 (E) 或確定 (O)/退出 (Q)? O
 ```
 
 產生完成
@@ -78,7 +78,7 @@ uid                 [ultimate] Wilber_chen (GSS) <wilber_chen@gss.com.tw>
 ssb   rsa4096/C13513872FF9040D 2020-01-09 [E]
 ```
 
-### 產生public key
+### 產生 public key
 
 ```text
 > gpg --armor --export <Fingerprint>
@@ -136,7 +136,7 @@ fatal: failed to write commit object
 如果可以執行正常，請檢查 git 設定是否正確，否之如果出現這個錯誤：
 
 ```text
-gpg: 簽署時失敗: Inappropriate ioctl for device
+gpg: 簽署時失敗：Inappropriate ioctl for device
 gpg: [stdin]: clear-sign failed: Inappropriate ioctl for device
 ```
 
@@ -316,3 +316,7 @@ pinentry-timeout:24:1:set the Pinentry timeout to N seconds:3:3:N:0::
 gpgconf --kill gpg-agent
 ```
 
+## GPG Mail
+
+- 官方為版本買斷制 [定價](https://gpgtools.org/support-plan)
+- 使用 [Free-GPGMail](https://github.com/Free-GPGMail/Free-GPGMail) 來取代
