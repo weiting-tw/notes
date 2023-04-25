@@ -242,4 +242,4 @@ b – 在當前目錄下打開 shell
 
 ## Show info when Login
 
-> echo "^sreenfetch" >> ~/.bashrc
+> echo "^screenfetch" >> ~/.bashrc
