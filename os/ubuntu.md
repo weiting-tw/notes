@@ -127,7 +127,7 @@ Now you have everything in place. Your swap file will be used even after you reb
 
 #### Adjust swappiness
 
-數值越高代表交換的越頻繁, [0~100] Default: 60
+數值越高代表交換的越頻繁，[0~100] Default: 60
 
 ```bash
 sudo sysctl vm.swappiness=25
@@ -167,7 +167,7 @@ sudo swapoff /swapfile
 sudo rm /swapfile
 ```
 
-## 查詢目前正在使用的PORT 號
+## 查詢目前正在使用的 PORT 號
 
 > sudo lsof -i -n -P|grep LISTEN
 > sudo netstat -lpn |grep {port}
@@ -240,4 +240,36 @@ Commands:
   Operating System: Ubuntu 20.04.3 LTS
             Kernel: Linux 5.4.0-89-generic
       Architecture: x86-64
+```
+
+## Daemon 註冊
+
+### 新增服務檔案
+
+> sudo nano /etc/systemd/system/openfortivpn.service
+
+## 設定
+
+```bash
+[Unit]
+Description=OpenFortiVPN Daemon
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/openfortivpn --config=/etc/openfortivpn/config --persistent
+Restart=always
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target
+```
+
+### 註冊及啟用
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable openfortivpn.service
+sudo systemctl start openfortivpn.service
 ```
