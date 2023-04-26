@@ -273,3 +273,9 @@ sudo systemctl daemon-reload
 sudo systemctl enable openfortivpn.service
 sudo systemctl start openfortivpn.service
 ```
+
+### 查看 log
+
+```bash
+sudo journalctl -u openfortivpn.service
+```
