@@ -32,7 +32,8 @@ deployer.json
     "Microsoft.Resources/deployments/write",
     "Microsoft.Web/sites/config/list/action",
     "Microsoft.Web/sites/read",
-    "Microsoft.Web/sites/publishxml/action"
+    "Microsoft.Web/sites/publishxml/action",
+    "Microsoft.Web/sites/basicPublishingCredentialsPolicies/read"
   ],
   "AssignableScopes": [
     "/subscriptions/{subscriptionId}",
@@ -48,6 +49,7 @@ deployer.json
 * Microsoft.Web/sites/slots/config/list/action
 * Microsoft.Web/sites/slots/read
 * Microsoft.Web/sites/slots/publishxml/action
+* Microsoft.Web/sites/slots/basicPublishingCredentialsPolicies/read
 
 #### 手動切換 router
 
