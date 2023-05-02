@@ -248,7 +248,7 @@ Commands:
 
 > sudo nano /etc/systemd/system/openfortivpn.service
 
-## 設定
+### 設定
 
 ```bash
 [Unit]
