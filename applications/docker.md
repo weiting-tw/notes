@@ -49,9 +49,9 @@ docker volume ls
 docker volume rm volume_name volume_name
 ```
 
-### daemon.json的作用
+### daemon.json 的作用
 
-docker安裝後預設沒有daemon.json這個配置檔案，需要進行手動建立。配置檔案的預設路徑：`/etc/docker/daemon.json`
+docker 安裝後預設沒有 daemon.json 這個配置檔案，需要進行手動建立。配置檔案的預設路徑：`/etc/docker/daemon.json`
 
 ```javascript
 {
@@ -145,15 +145,15 @@ docker安裝後預設沒有daemon.json這個配置檔案，需要進行手動建
 
 ## 修改容器的 DNS 伺服器
 
-檢視容器的 dns 解析設定檔案, 也可以檢查docker 執行環境 DNS
+檢視容器的 dns 解析設定檔案，也可以檢查 docker 執行環境 DNS
 
 > docker run busybox:latest cat /etc/resolv.conf
 
-為容器 mybusybox 執行手動設定一個dns伺服器, 並檢查是否生效
+為容器 mybusybox 執行手動設定一個 dns 伺服器，並檢查是否生效
 
 > docker run --dns 10.0.0.2 --name mybusybox busybox:latest cat /etc/resolv.conf
 
-定製化容器執行環境的 dns 伺服器, 在Host OS上編輯下面檔案, 增加dns 伺服器, 並重啟docker 服務.
+定製化容器執行環境的 dns 伺服器，在 Host OS 上編輯下面檔案，增加 dns 伺服器，並重啟 docker 服務。
 
 > cat /etc/docker/daemon.json
 
@@ -263,4 +263,17 @@ services:
 ```bash
 export COMPOSE_HTTP_TIMEOUT=500
 export DOCKER_CLIENT_TIMEOUT=500
+```
+
+## 免下 sudo
+
+```sh
+# 增加 docker 群組
+sudo groupadd docker
+
+# 當前使用者加入 docker 群組中
+sudo usermod -aG docker $USER
+
+# 切換使用者使用的群組
+newgrp docker
 ```
