@@ -36,7 +36,7 @@ Host alias-name                       # 用來連線的 alias 名稱
  Port port-number                     # host 的 SSH port
  IdentitiesOnly yes                   # 使用指定的 key
  IdentityFile ~/.ssh/private_ssh_file # 指定 pem 或 pub 的 key 路徑
- User username-on-remote-machine      # (選填)登入 SSH 的 username，只連 git 的話，可以不必要
+ User username-on-remote-machine      # (選填) 登入 SSH 的 username，只連 git 的話，可以不必要
  ForwardX11 yes                       # (選填) 啟用回傳 GUI
 ```
 
@@ -72,7 +72,7 @@ scp 指定 SSH name
 
 ## ssh-keygen 常用參數詳解
 
-ssh-keygen是SSH服務下的一個生成、管理和轉換認證密鑰的命令工具。包括兩種密鑰類型DSA和RSA 通過公私鑰的驗證可以使服務器與服務器之間實現無密碼通訊。 ssh-keygen常用參數
+ssh-keygen 是 SSH 服務下的一個生成、管理和轉換認證密鑰的命令工具。包括兩種密鑰類型 DSA 和 RSA 通過公私鑰的驗證可以使服務器與服務器之間實現無密碼通訊。ssh-keygen 常用參數
 
 ```bash
 -t：指定生成密鑰的類型，默認使用SSH2d的rsa
@@ -86,6 +86,12 @@ ssh-keygen是SSH服務下的一個生成、管理和轉換認證密鑰的命令�
 
 ```bash
 ssh-keygen -t ed25519 -C "<comment>"
+```
+
+### 確認金鑰格式
+
+```bash
+ssh-keygen -lf /path/to/your/public/key.pub
 ```
 
 ## Arguments
