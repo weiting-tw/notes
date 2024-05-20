@@ -63,3 +63,44 @@ Folder permissions for web application
 Folder add permission  
 User Name: `IIS AppPool\ApplicationPoolName`
 
+## 透過 URL Rewrite 來實作 cookie 重導
+
+```web.config
+<rewrite>
+    <rules>
+        <!-- Rule to conditionally remove "backend" based on a cookie -->
+        <rule name="Conditional Remove Backend from URL" stopProcessing="true">
+            <match url="^backend/(.*)" ignoreCase="true" />
+            <conditions>
+                <add input="{HTTP_COOKIE}" pattern="x-ms-routing-name=self" />
+            </conditions>
+            <action type="Rewrite" url="staging/{R:1}" />
+        </rule>
+
+        <!-- Rules for cookie-based routing to staging and preview -->
+        <rule name="Route to Staging" stopProcessing="true">
+            <match url="^backend/(.*)" />
+            <conditions>
+                <add input="{HTTP_COOKIE}" pattern="x-ms-routing-name=staging" />
+            </conditions>
+            <action type="Rewrite" url="staging/{R:1}" />
+        </rule>
+
+        <rule name="Route to Preview" stopProcessing="true">
+            <match url="^backend/(.*)" />
+            <conditions>
+                <add input="{HTTP_COOKIE}" pattern="x-ms-routing-name=preview" />
+            </conditions>
+            <action type="Rewrite" url="preview/{R:1}" />
+        </rule>
+
+        <rule name="Route to Production" stopProcessing="true">
+            <match url="^backend/(.*)" />
+            <conditions>
+                <add input="{HTTP_COOKIE}" pattern="x-ms-routing-name=production" />
+            </conditions>
+            <action type="Rewrite" url="production/{R:1}" />
+        </rule>
+    </rules>
+</rewrite>
+```
