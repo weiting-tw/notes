@@ -215,3 +215,45 @@ docker run -it --restart always -p 9005:9000 \
       Insecure = false # using https
 ```
 
+## AI reviewer
+
+### [pr-agent](https://github.com/Codium-ai/pr-agent/)
+
+Qode Merge PR-Agent aims to help efficiently review and handle pull requests, by providing AI feedback and suggestions
+
+```yaml
+stages:
+  - mr_agent
+
+mr_agent_job:
+  stage: mr_agent
+  image:
+    name: codiumai/pr-agent:latest
+    entrypoint: [""]
+  script:
+    - cd /app
+    - echo "Running PR Agent action step"
+    - export MR_URL="$CI_MERGE_REQUEST_PROJECT_URL/merge_requests/$CI_MERGE_REQUEST_IID"
+    - export gitlab__url=$CI_SERVER_PROTOCOL://$CI_SERVER_FQDN
+    - |
+      if [ -z "$GITLAB_PERSONAL_ACCESS_TOKEN" ]; then 
+        echo "GITLAB_PERSONAL_ACCESS_TOKEN is not set"; 
+        exit 1; 
+      fi
+    - export gitlab__PERSONAL_ACCESS_TOKEN=$GITLAB_PERSONAL_ACCESS_TOKEN
+    - export config__git_provider="gitlab"
+    - export openai__api_type="azure"
+    - export openai__api_base=$AZURE_OPENAI_ENDPOINT
+    - export openai__key=$AZURE_OPENAI_KEY
+    - export openai__deployment_id="$AZURE_OPENAI_MODEL"
+    - export openai__api_version="$AZURE_OPENAI_API_VERSION"
+    - python -m pr_agent.cli --pr_url="$MR_URL" describe
+    - python -m pr_agent.cli --pr_url="$MR_URL" review
+    - python -m pr_agent.cli --pr_url="$MR_URL" improve
+    - python -m pr_agent.cli --pr_url="$MR_URL" update_changelog
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+  tags:
+    - docker
+    - external
+```
