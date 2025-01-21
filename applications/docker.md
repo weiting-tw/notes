@@ -277,3 +277,15 @@ sudo usermod -aG docker $USER
 # 切換使用者使用的群組
 newgrp docker
 ```
+
+## 建置多架構的映像檔
+
+https://github.com/docker/buildx
+
+```bash
+# 創建或切換到 buildx
+docker buildx create --use
+
+# 構建多架構映像檔並推送到 Docker Hub
+docker buildx build --platform linux/386,linux/amd64,linux/arm64 --push -t your_dockerhub_username/your_image_name:tag .
+```
