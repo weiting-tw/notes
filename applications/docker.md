@@ -289,3 +289,95 @@ docker buildx create --use
 # 構建多架構映像檔並推送到 Docker Hub
 docker buildx build --platform linux/386,linux/amd64,linux/arm64 --push -t your_dockerhub_username/your_image_name:tag .
 ```
+
+## 如何在 `docker-compose.yml` 中支持相同的 `docker build` 命令？
+
+對於代碼信息來說，您的情況需要略微調整 `docker-compose.yml` 配置以模仿相同行為。以下是基於您提供的指令對 `docker-compose.yml` 文件的配置示例：
+
+### 修改後的 `docker-compose.yml` 示例
+```yaml
+version: "3.8"
+
+services:
+  gitlab_pr_agent:
+    build:
+      context: .                # 對應 `docker build .`
+      dockerfile: docker/Dockerfile # 對應 `-f docker/Dockerfile`
+      target: gitlab_webhook    # 對應 `--target gitlab_webhook`
+    image: gitlab_pr_agent      # 對應 `-t gitlab_pr_agent`
+    ports:
+      - "3000:3000"
+```
+
+---
+
+### 逐個部分解釋：
+1. **`build.context`**
+   - 這相當於 `docker build .` 中的 `.`，表示 Docker build 的上下文是當前工作目錄（`.`）。
+   - 上下文目錄內的所有文件（包括 `docker/` 資料夾）都會被 Docker daemon 用於建構映像。
+
+2. **`build.dockerfile`**
+   - 使用 `docker/Dockerfile`，這相當於您在 `docker build` 命令中使用的 `-f docker/Dockerfile`。
+
+3. **`build.target`**
+   - 使用多階段構建 `--target gitlab_webhook`，這裡指定構建目標為您在 Dockerfile 中定義的 `gitlab_webhook` 階段。
+
+4. **`image`**
+   - 這指定了構建的映像名稱為 `gitlab_pr_agent`，等同於 `-t gitlab_pr_agent`。
+
+5. **`ports`**
+   - 這是一個額外配置，將容器內的端口 `3000` 暴露到主機上的端口 `3000`。
+
+---
+
+### 執行指令
+在配置好 `docker-compose.yml` 後，可以使用以下指令來執行服務：
+
+```bash
+docker-compose up --build
+```
+
+這會同時進行構建和運行，`--build` 確保在啟動之前重新構建映像。
+
+---
+
+#### 注意事項：
+1. **目錄結構須正確：**
+   如果您傳入的 `context` 和 `dockerfile` 路徑無法對應正確的檔案，`docker-compose` 會出現錯誤。假設目錄結構如下：
+
+   ```
+   project/
+   ├── docker-compose.yml
+   ├── docker/
+   │   └── Dockerfile
+   └── app/
+       └── main.py
+   ```
+
+   `docker-compose.yml` 中的 `context: .` 是 `project/`，`dockerfile` 必須相對於 `context`。
+
+2. **多階段構建 (`--target`) 要求的特定目標：**
+   在您的 `Dockerfile` 中應該有類似以下的多階段構建：
+
+   ```dockerfile
+   # 第一階段
+   FROM python:3.8 AS base
+   # 設置基礎環境...
+
+   # Webhook 階段
+   FROM base AS gitlab_webhook
+   # 構建 webhook 的環境...
+   ```
+
+   `gitlab_webhook` 是一個特定的構建階段名稱，這需要在 Dockerfile 中作為標籤定義。如果不存在，您會遇到 `Unknown target stage` 的錯誤。
+
+3. **手動構建/測試 `docker-compose up` 的過程：**
+   若您在測試執行時仍然遇到錯誤，這裡有一些診斷指令：
+   - 測試手動構建的效果是否正常（確認 `--target` 是否正確）：
+     ```bash
+     docker build . -f docker/Dockerfile --target gitlab_webhook -t gitlab_pr_agent
+     ```
+   - 查看構建過程的詳細日誌，以排除錯誤：
+     ```bash
+     docker-compose up --build --verbose
+     ```
